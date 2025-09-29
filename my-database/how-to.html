@@ -1,1 +1,199 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Database</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1, h2, h3, h4 {
+            color: #007bff;
+            text-align: center;
+        }
+        p, ul, ol {
+            max-width: 800px;
+            text-align: left;
+        }
+        .section {
+            max-width: 800px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Database</h1>
+    <p><a href="my-database.html">Back to My Database</a> | <a href="index.html">Home</a></p>
+    
+    <div class="section">
+        <h2>Tutorial</h2>
+        <p>This How-To provides a step-by-step guide to using all features of <strong>My Database</strong> on your smartphone. The app opens on the Databases screen by default (or loads the default database/table if configured). Navigation is intuitive, using buttons, long-press gestures for options, and dialogs for inputs.</p>
+        <p><strong>Note:</strong> The app requests permissions for storage, photos, and camera as needed—grant them for full functionality. If denied, enable them in your phone's settings. For Android 11+, enable "All files access" in the app's settings for imports/exports. Heavy tasks like exports/imports run in background isolates to display progress and prevent UI freezes.</p>
+        
+        <h3>Getting Started and Settings</h3>
+        <ul>
+            <li><strong>Launch the App:</strong> On first run, the app imports sample data from embedded ZIP assets (Animals.zip and people_100000.zip) into the documents directory. It creates databases with tables and adds an 'image_paths' column if missing. The Databases list screen appears.</li>
+            <li><strong>Access Settings:</strong> Tap the gear icon (⚙️) in the top-right of the Databases screen.
+                <ul>
+                    <li><strong>App Version:</strong> Displays the current version and build number (via package_info_plus).</li>
+                    <li><strong>Theme:</strong> Select "Dark Mode" via toggle. Changes apply instantly and are saved.</li>
+                    <li><strong>Image Quality:</strong> Toggle "High Image Quality" on/off. High quality uses no compression (larger files); low (85%) compresses images for efficiency during uploads.</li>
+                    <li><strong>Thumbnail Scale:</strong> Adjust the slider (50%–300%) to change thumbnail sizes in lists and viewers. Higher scales enlarge previews but may slow loading for large datasets.</li>
+                    <li><strong>Show All Posts on Open:</strong> Toggle to load all posts immediately when opening a table (vs. lazy loading with pagination).</li>
+                </ul>
+            Tap "Close" to save and exit. Settings persist across sessions.</li>
+            <li><strong>Home Navigation:</strong> From any screen, tap the home icon (🏠) in the app bar to return to the Databases list.</li>
+        </ul>
+        
+        <h3>Managing Databases</h3>
+        <p>The main screen lists all databases (.db files) in alphabetical order (saved via shared_preferences), with icons. Tap a database to open its Tables screen (prompts for password if encrypted).</p>
+        <h4>Creating a Database</h4>
+        <ol>
+            <li>Tap the floating "+" button at the bottom-right.</li>
+            <li>Select "Create Database".</li>
+            <li>Enter a name (e.g., "MyNotes") in the dialog and tap "Create". This creates an empty .db file.</li>
+        </ol>
+        <h4>Importing a Database</h4>
+        <ol>
+            <li>Tap "+" and choose "Import ZIP (Database + Images)", "Import SQLite DB", or "Import from CSV".</li>
+            <li>Grant storage permissions if prompted.
+                <ul>
+                    <li><strong>ZIP Import:</strong> Select a .zip file; it extracts the .db and images to the app's documents directory, with a progress dialog.</li>
+                    <li><strong>SQLite Import:</strong> Select a .db/.sqlite/.sqlite3 file; copies it and adds 'image_paths' if missing.</li>
+                    <li><strong>CSV Import:</strong> Select a .csv file; creates a new database/table with columns from headers (sanitized names), imports rows in batches with a progress dialog.</li>
+                </ul>
+            </li>
+            <li>Imports process in a background isolate (showing % progress) and refresh the list.</li>
+        </ol>
+        <h4>Database Options (Long-Press a Database Name)</h4>
+        <ul>
+            <li><strong>Set as Default:</strong> Configures it (and its default table) to open automatically on app launch.</li>
+            <li><strong>Export:</strong> Choose "Save to Device" (select folder) or "Share" (via share_plus). Exports as ZIP (database + all referenced images, collected via batch queries), with a progress dialog in an isolate. For encrypted DBs, prompts for password.</li>
+            <li><strong>Rename:</strong> Edit the name in the text field and tap "Rename" (updates file and preferences).</li>
+            <li><strong>Add Password:</strong> Enter a new password to encrypt (uses sqlcipher_export in a temp DB).</li>
+            <li><strong>Remove Password:</strong> Enter the current password to decrypt (similar process).</li>
+            <li><strong>Delete:</strong> Confirm to permanently delete the .db file (and unreferenced images).</li>
+            <li><strong>Reorder:</strong> Use up/down arrows to move in the list (saves order).</li>
+            <li>Tap "Cancel" to exit options.</li>
+        </ul>
+        
+        <h3>Managing Tables (Inside a Database)</h3>
+        <p>From the Databases screen, tap a database to view its tables list (queried via sqlite_master, excluding system tables).</p>
+        <h4>Creating a Table</h4>
+        <ol>
+            <li>Tap the floating "+" button.</li>
+            <li>Enter a table name (e.g., "Entries", sanitized to letters/numbers/underscores) and optional columns (comma-separated, e.g., "title,description"). The 'image_paths' (TEXT) column is auto-added for image support.</li>
+            <li>Tap "Create".</li>
+        </ol>
+        <h4>Table Options (Long-Press a Table Name)</h4>
+        <ul>
+            <li><strong>Set as Default:</strong> Pairs with the default database for auto-open on launch.</li>
+            <li><strong>Rename:</strong> Edit the name (sanitized) and tap "Rename".</li>
+            <li><strong>Edit Columns:</strong> Opens a dialog to manage non-'image_paths' columns (via PRAGMA table_info).
+                <ul>
+                    <li><strong>Add:</strong> Tap "Add New Column", enter name (sanitized), tap "Add".</li>
+                    <li><strong>Move:</strong> Use up/down arrows to reorder (recreates table in temp, copies data).</li>
+                    <li><strong>Rename:</strong> Tap edit icon, enter new name, tap "Rename" (uses ALTER TABLE).</li>
+                    <li><strong>Delete:</strong> Tap delete icon (red), confirm (recreates table without column, copies data; can't delete PK or 'image_paths').</li>
+                </ul>
+            </li>
+            <li><strong>Delete:</strong> Confirm to drop the table and all data.</li>
+            <li>Tap a table name to open its Posts screen (loads all if toggled, else paginates).</li>
+        </ul>
+        
+        <h3>Managing Posts (Records in a Table)</h3>
+        <p>The Posts screen displays paginated entries (100 per load, infinite scroll via ScrollController). Each post is a card with fields (via PRAGMA) and thumbnails. Long-press a card to toggle edit/delete buttons. Tap a card to open the detailed view.</p>
+        <h4>Adding a Post</h4>
+        <ol>
+            <li>Tap the floating "+" button.</li>
+            <li>Fill text fields for each column.</li>
+            <li>If images are supported: Tap "+Gallery" or "+Camera" (grants permissions, rotates via EXIF, compresses via flutter_image_compress based on quality setting, creates thumbnail). Reorder/delete thumbnails in the dialog.</li>
+            <li>Tap "Add" to insert (JSON-encodes image_paths).</li>
+        </ol>
+        <h4>Editing a Post</h4>
+        <ol>
+            <li>Long-press card > "Edit" (or in detailed view).</li>
+            <li>Update fields/images.</li>
+            <li>Tap "Update" (uses rowid or PK for WHERE).</li>
+        </ol>
+        <h4>Deleting a Post</h4>
+        <ol>
+            <li>Long-press card > "Delete" (red) > Confirm.</li>
+        </ol>
+        <h4>Adding Images to a Post</h4>
+        <ul>
+            <li>In card or detailed view: Tap "+Gallery" or "+Camera" (appends to existing image_paths JSON).</li>
+        </ul>
+        <h4>Viewing Images</h4>
+        <ul>
+            <li>Tap a thumbnail for full-screen viewer (PageView with InteractiveViewer for zoom up to 32x, swipe navigation; disables scroll when zoomed). Tap to exit.</li>
+        </ul>
+        <h4>Detailed Post View (Single Post Screen)</h4>
+        <ul>
+            <li>Shows all fields and larger thumbnails. Long-press for edit/delete. Add images or edit/delete as above. Updates refresh the list.</li>
+        </ul>
+        
+        <h3>Searching and Filtering Posts</h3>
+        <h4>Simple Search</h4>
+        <ul>
+            <li>Enter keywords in the search bar (e.g., "apple pie").</li>
+            <li>Tap search icon or enter: Filters across text columns (LIKE %term% or FTS if table has fts_table). Results paginate.</li>
+            <li>Clear bar (X) to reset.</li>
+        </ul>
+        <h4>Showing All Posts</h4>
+        <ul>
+            <li>Tap "All" button to display everything (ignores search).</li>
+        </ul>
+        <h4>Advanced Search (Tune Icon)</h4>
+        <ul>
+            <li><strong>Sort:</strong> Choose column and ASC/DESC (applies ORDER BY).</li>
+            <li><strong>Filters:</strong> Per column, select operator (None, Contains, Equals, >, <, Between) and values (casts to REAL for numbers). Combines with AND (and with simple search if active).</li>
+            <li>Tap "Apply" to filter (resets pagination). "Reset" clears dialog.</li>
+        </ul>
+        <h4>Exporting Search Results</h4>
+        <ul>
+            <li>Tap download icon (↓) in app bar.</li>
+            <li>Select folder to save as CSV (all columns except image_paths, full results not just page).</li>
+        </ul>
+        <h4>Count Display</h4>
+        <ul>
+            <li>Shows "Found X entries" (or "Total" if no search) below bar (queried separately, with loading indicator).</li>
+        </ul>
+        
+        <h3>Additional Tips</h3>
+        <ul>
+            <li><strong>Pagination:</strong> Auto-loads on scroll end; efficient for large sets (e.g., 100k rows).</li>
+            <li><strong>Error Handling:</strong> Prompts for passwords on open/export; snackbars for errors (e.g., wrong password, invalid CSV). Ignores JSON parse errors in image_paths.</li>
+            <li><strong>Performance:</strong> Uses batches (1000 rows) for exports; isolates for ZIP/CSV processing. High quality increases sizes; thumbnails always JPEG.</li>
+            <li><strong>Back Navigation:</strong> Use phone's back button or home icon.</li>
+            <li><strong>Troubleshooting:</strong> If imports/exports fail, check permissions/file paths. Restart app if stuck. For encrypted DBs, always enter password when prompted.</li>
+        </ul>
+    </div>
+    
+    <p><a href="my-database.html">Back to My Database</a> | <a href="index.html">Home</a></p>
+</body>
+</html>
