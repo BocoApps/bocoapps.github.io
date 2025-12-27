@@ -56,26 +56,18 @@
        
         <h3>Getting Started and Settings</h3>
         <ul>
-            <li><strong>Launch the App:</strong> On first run, the app imports sample data from embedded ZIP assets (Animals.zip and people_100000.zip) into the documents directory. It creates databases with tables and adds an 'image_paths' column if missing. The Databases list screen appears.</li>
+            <li><strong>Launch the App:</strong> On first run, the app imports sample data from embedded ZIP assets into the documents directory. The Databases list screen then appears.</li>
             <li><strong>Access Settings:</strong> Tap the gear icon (⚙️) in the top-right of the Databases screen.
-                <ul>
-                    <li><strong>App Version:</strong> Displays the current version and build number (via package_info_plus).</li>
-                    <li><strong>Theme:</strong> Select "Dark Mode" via toggle. Changes apply instantly and are saved.</li>
-                    <li><strong>Image Quality:</strong> Toggle "High Image Quality" on/off. High quality uses no compression (larger files); low (85%) compresses images for efficiency during uploads.</li>
-                    <li><strong>Thumbnail Scale:</strong> Adjust the slider (50%–300%) to change thumbnail sizes in lists and viewers. Higher scales enlarge previews but may slow loading for large datasets.</li>
-                    <li><strong>Show All Posts on Open:</strong> Toggle to load all posts immediately when opening a table (vs. lazy loading with pagination).</li>
-                </ul>
             Tap "Close" to save and exit. Settings persist across sessions.</li>
-            <li><strong>Home Navigation:</strong> From any screen, tap the home icon (🏠) in the app bar to return to the Databases list.</li>
         </ul>
        
         <h3>Managing Databases</h3>
-        <p>The main screen lists all databases (.db files) in alphabetical order (saved via shared_preferences), with icons. Tap a database to open its Tables screen (prompts for password if encrypted).</p>
+        <p>The Database list screen lists all databases. Tap a database to open its Tables screen (prompts for password if encrypted).</p>
         <h4>Creating a Database</h4>
         <ol>
             <li>Tap the floating "+" button at the bottom-right.</li>
             <li>Select "Create Database".</li>
-            <li>Enter a name (e.g., "MyNotes") in the dialog and tap "Create". This creates an empty .db file.</li>
+            <li>Enter a name (e.g., "MyNotes") in the dialog and tap "Create".</li>
         </ol>
         <h4>Importing a Database</h4>
         <ol>
@@ -292,7 +284,7 @@
         <h3>Steps to Install</h3>
         <h4>1. Upload the PHP Script</h4>
         <ul>
-            <li>Download the PHP script as <a href="https://bocoapps.github.io/my-database/my_database_api.php">.php</a> or <a href="https://bocoapps.github.io/my-database/my_database_api.zip">.zip</a>. You can also find it at the GitHub repository by clicking this link: <a href="https://github.com/BocoApps/bocoapps.github.io/tree/main/my-database">My Database</a></li>
+            <li>Download the PHP script as <a href="https://bocoapps.github.io/my-database/my_database_api.php">.php</a> or <a href="https://bocoapps.github.io/my-database/my_database_api.zip">.zip</a>. You can also find it at the <a href="https://github.com/BocoApps/bocoapps.github.io/tree/main/my-database">My Database GitHub repository</a>.</li>
             <li>Upload it to your web server (e.g., via FTP/SSH to <code>/var/www/html/</code> or a subdomain).</li>
             <li>Ensure the server supports PHP (e.g., Apache/Nginx with PHP 7+).</li>
             <li>The script's URL becomes your "API Base URL" (e.g., "https://example.com/my_database_api.php").</li>
