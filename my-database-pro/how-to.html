@@ -1,1 +1,324 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Database Pro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1, h2, h3, h4 {
+            color: #007bff;
+            text-align: center;
+        }
+        p, ul, ol {
+            max-width: 800px;
+            text-align: left;
+        }
+        .section {
+            max-width: 800px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Database Pro</h1>
+    <p><a href="/my-database-pro">My Database</a> | <a href="/index.html">Boco Apps</a></p>
+   
+    <div class="section">
+        <h2>Tutorial</h2>
+        <p>This How-To provides a step-by-step guide to using all features of <strong>My Database</strong> on your smartphone. The app opens on the Databases screen by default (or loads the default database/table if configured). Navigation is intuitive, using buttons, long-press gestures for options, and dialogs for inputs.</p>
+        <p><strong>Note:</strong> The app requests permissions for storage, photos, and camera as needed—grant them for full functionality. If denied, enable them in your phone's settings. For Android 11+, enable "All files access" in the app's settings for imports/exports. Heavy tasks like exports/imports run in background isolates to display progress and prevent UI freezes.</p>
+       
+        <h3>Getting Started and Settings</h3>
+        <ul>
+            <li><strong>Launch the App:</strong> On first run, the app imports sample data from embedded ZIP assets into the documents directory. The Databases list screen then appears.</li>
+            <li><strong>Access Settings:</strong> Tap the gear icon (⚙️) in the top-right of the Databases screen.
+            Tap "Close" to save and exit. Settings persist across sessions.</li>
+        </ul>
+       
+        <h3>Managing Databases</h3>
+        <p>The Database list screen lists all databases. Tap a database to open its Tables screen (prompts for password if encrypted).</p>
+        <h4>Creating a Database</h4>
+        <ol>
+            <li>Tap the "+" button at the top.</li>
+            <li>Select "Create Database".</li>
+            <li>Enter a name (e.g., "MyNotes") in the dialog and tap "Create".</li>
+        </ol>
+        <h4>Importing a Database</h4>
+        <ol>
+            <li>Tap "+" and choose "Import ZIP (Database + Images)", "Import SQLite DB", or "Import from CSV".</li>
+            <li>Grant storage permissions if prompted.
+                <ul>
+                    <li><strong>ZIP Import:</strong> Select a .zip file; it extracts the .db and images to the app's documents directory, with a progress dialog.</li>
+                    <li><strong>SQLite Import:</strong> Select a .db/.sqlite/.sqlite3 file; copies it and adds 'image_paths' if missing.</li>
+                    <li><strong>CSV Import:</strong> Select a .csv file; creates a new database/table with columns from headers (sanitized names), imports rows in batches with a progress dialog.</li>
+                </ul>
+            </li>
+            <li>Imports process in a background isolate (showing % progress) and refresh the list.</li>
+        </ol>
+        <h4>Database Options (Long-Press a Database Name)</h4>
+        <ul>
+            <li><strong>Set as Default:</strong> Configures it (and its default table) to open automatically on app launch.</li>
+            <li><strong>Export:</strong> Choose "Save to Device" (select folder) or "Share" (via share_plus). Exports as ZIP (database + all referenced images, collected via batch queries), with a progress dialog in an isolate. For encrypted DBs, prompts for password.</li>
+            <li><strong>Rename:</strong> Edit the name in the text field and tap "Rename" (updates file and preferences).</li>
+            <li><strong>Add Password:</strong> Enter a new password to encrypt (uses sqlcipher_export in a temp DB).</li>
+            <li><strong>Remove Password:</strong> Enter the current password to decrypt (similar process).</li>
+            <li><strong>Delete:</strong> Confirm to permanently delete the .db file (and unreferenced images).</li>
+            <li><strong>Reorder:</strong> Use up/down arrows to move in the list (saves order).</li>
+            <li>Tap "Cancel" to exit options.</li>
+        </ul>
+       
+        <h3>Managing Tables (Inside a Database)</h3>
+        <p>From the Databases screen, tap a database to view its tables list (queried via sqlite_master, excluding system tables).</p>
+        <h4>Creating a Table</h4>
+        <ol>
+            <li>Tap the floating "+" button.</li>
+            <li>Enter a table name (e.g., "Entries", sanitized to letters/numbers/underscores) and optional columns (comma-separated, e.g., "title,description"). The 'image_paths' (TEXT) column is auto-added for image support.</li>
+            <li>Tap "Create".</li>
+        </ol>
+        <h4>Table Options (Long-Press a Table Name)</h4>
+        <ul>
+            <li><strong>Set as Default:</strong> Pairs with the default database for auto-open on launch.</li>
+            <li><strong>Rename:</strong> Edit the name (sanitized) and tap "Rename".</li>
+            <li><strong>Edit Columns:</strong> Opens a dialog to manage non-'image_paths' columns (via PRAGMA table_info).
+                <ul>
+                    <li><strong>Add:</strong> Tap "Add New Column", enter name (sanitized), tap "Add".</li>
+                    <li><strong>Move:</strong> Use up/down arrows to reorder (recreates table in temp, copies data).</li>
+                    <li><strong>Rename:</strong> Tap edit icon, enter new name, tap "Rename" (uses ALTER TABLE).</li>
+                    <li><strong>Delete:</strong> Tap delete icon (red), confirm (recreates table without column, copies data; can't delete PK or 'image_paths').</li>
+                </ul>
+            </li>
+            <li><strong>Delete:</strong> Confirm to drop the table and all data.</li>
+            <li>Tap a table name to open its Posts screen (loads all if toggled, else paginates).</li>
+        </ul>
+       
+        <h3>Managing Posts (Records in a Table)</h3>
+        <p>The Posts screen displays paginated entries (100 per load, infinite scroll via ScrollController). Each post is a card with fields (via PRAGMA) and thumbnails. Long-press a card to toggle edit/delete buttons. Tap a card to open the detailed view.</p>
+        <h4>Adding a Post</h4>
+        <ol>
+            <li>Tap the floating "+" button.</li>
+            <li>Fill text fields for each column.</li>
+            <li>If images are supported: Tap "+Gallery" or "+Camera" (grants permissions, rotates via EXIF, compresses via flutter_image_compress based on quality setting, creates thumbnail). Reorder/delete thumbnails in the dialog.</li>
+            <li>Tap "Add" to insert (JSON-encodes image_paths).</li>
+        </ol>
+        <h4>Editing a Post</h4>
+        <ol>
+            <li>Long-press card > "Edit" (or in detailed view).</li>
+            <li>Update fields/images.</li>
+            <li>Tap "Update" (uses rowid or PK for WHERE).</li>
+        </ol>
+        <h4>Deleting a Post</h4>
+        <ol>
+            <li>Long-press card > "Delete" (red) > Confirm.</li>
+        </ol>
+        <h4>Adding Images to a Post</h4>
+        <ul>
+            <li>In card or detailed view: Tap "+Gallery" or "+Camera" (appends to existing image_paths JSON).</li>
+        </ul>
+        <h4>Viewing Images</h4>
+        <ul>
+            <li>Tap a thumbnail for full-screen viewer (PageView with InteractiveViewer for zoom up to 32x, swipe navigation; disables scroll when zoomed). Tap to exit.</li>
+        </ul>
+        <h4>Detailed Post View (Single Post Screen)</h4>
+        <ul>
+            <li>Shows all fields and larger thumbnails. Long-press for edit/delete. Add images or edit/delete as above. Updates refresh the list.</li>
+        </ul>
+       
+        <h3>Searching and Filtering Posts</h3>
+        <h4>Simple Search</h4>
+        <ul>
+            <li>Enter keywords in the search bar (e.g., "apple pie").</li>
+            <li>Tap search icon or enter: Filters across text columns (LIKE %term% or FTS if table has fts_table). Results paginate.</li>
+            <li>Clear bar (X) to reset.</li>
+        </ul>
+        <h4>Showing All Posts</h4>
+        <ul>
+            <li>Tap "All" button to display everything (ignores search).</li>
+        </ul>
+        <h4>Advanced Search (Tune Icon)</h4>
+        <ul>
+            <li><strong>Sort:</strong> Choose column and ASC/DESC (applies ORDER BY).</li>
+            <li><strong>Filters:</strong> Per column, select operator (None, Contains, Equals, >, <, Between) and values (casts to REAL for numbers). Combines with AND (and with simple search if active).</li>
+            <li>Tap "Apply" to filter (resets pagination). "Reset" clears dialog.</li>
+        </ul>
+        <h4>Exporting Search Results</h4>
+        <ul>
+            <li>Tap download icon (↓) in app bar.</li>
+            <li>Select folder to save as CSV (all columns except image_paths, full results not just page).</li>
+        </ul>
+        <h4>Count Display</h4>
+        <ul>
+            <li>Shows "Found X entries" (or "Total" if no search) below bar (queried separately, with loading indicator).</li>
+        </ul>
+       
+        <h3>Additional Tips</h3>
+        <ul>
+            <li><strong>Pagination:</strong> Auto-loads on scroll end; efficient for large sets (e.g., 100k rows).</li>
+            <li><strong>Error Handling:</strong> Prompts for passwords on open/export; snackbars for errors (e.g., wrong password, invalid CSV). Ignores JSON parse errors in image_paths.</li>
+            <li><strong>Performance:</strong> Uses batches (1000 rows) for exports; isolates for ZIP/CSV processing. High quality increases sizes; thumbnails always JPEG.</li>
+            <li><strong>Back Navigation:</strong> Use phone's back button or home icon.</li>
+            <li><strong>Troubleshooting:</strong> If imports/exports fail, check permissions/file paths. Restart app if stuck. For encrypted DBs, always enter password when prompted.</li>
+        </ul>
+    </div>
+    
+    <div class="section">
+        <h2>SSH Terminal Usage</h2>
+        <p>The SSH Terminal allows you to connect to remote servers (e.g., Linux servers) for command-line access. It's useful for managing servers, running scripts, or troubleshooting.</p>
+        
+        <h3>Adding and Managing SSH Connections</h3>
+        <ol>
+            <li>Open the app and navigate to the "SSH Connections" menu (accessible from the main screen or database list).</li>
+            <li>Tap the "+" icon in the app bar to add a new connection.</li>
+            <li>Enter:
+                <ul>
+                    <li><strong>Connection Name:</strong> A friendly name (e.g., "My Server").</li>
+                    <li><strong>Host IP:</strong> The server's IP address or domain (e.g., "192.168.1.100" or "example.com").</li>
+                    <li><strong>Port:</strong> Default is 22 (standard SSH port).</li>
+                    <li><strong>Username:</strong> Your server username (e.g., "root" or "user").</li>
+                    <li><strong>Password:</strong> Your server password (stored securely in the app).</li>
+                </ul>
+            </li>
+            <li>Tap "Add" to save. If there's an error (e.g., duplicate name or invalid port), it will be shown.</li>
+            <li>Connections are listed and can be reordered by dragging (long-press and move).</li>
+            <li>To edit: Tap the "more" icon (three dots) next to a connection and select "Edit".</li>
+            <li>To delete: Select "Delete" from the same menu (confirmation required).</li>
+        </ol>
+        
+        <h3>Connecting to a Server</h3>
+        <ol>
+            <li>Tap a connection from the list to open the terminal.</li>
+            <li>The app will attempt to connect automatically using the provided credentials.</li>
+            <li>Once connected, you'll see a terminal interface (powered by xterm.dart).</li>
+            <li>Type commands as usual. Special keys:
+                <ul>
+                    <li>Use the on-screen buttons for CTRL, ALT, TAB, ESC, arrows, ENTER, etc.</li>
+                    <li>CTRL/ALT modifiers: Toggle them on/off; they apply to the next key press.</li>
+                </ul>
+            </li>
+            <li>The terminal supports resizing and basic input/output.</li>
+            <li>Connection status is shown (e.g., "Connecting..." or "Connected successfully").</li>
+            <li>To disconnect: Close the screen or let the session end naturally.</li>
+        </ol>
+        
+        <h3>Important Notes for SSH</h3>
+        <ul>
+            <li><strong>Battery Optimization:</strong> The app reminds you to disable battery optimization for the app (via a Snackbar). This keeps the connection alive in the background. Tap the message to open Android settings and disable it. Otherwise, Android may kill the app, disconnecting SSH.</li>
+            <li><strong>Security:</strong> Passwords are stored locally (via shared_preferences). Use strong passwords and avoid saving sensitive ones.</li>
+            <li><strong>Limitations:</strong> No key-based authentication (password-only). For production, ensure your server allows password logins securely.</li>
+            <li><strong>Troubleshooting:</strong> If connection fails, check host/port/username/password. Errors are displayed in the terminal (e.g., "Error: Connection refused").</li>
+        </ul>
+    </div>
+    
+    <div class="section">
+        <h2>MySQL Database Usage</h2>
+        <p>MySQL support lets you connect to remote MySQL databases, browse tables, query data, add/edit/delete posts, and handle images (uploaded to the server).</p>
+        
+        <h3>Adding and Managing MySQL Connections</h3>
+        <ol>
+            <li>From the main "Databases" screen, tap the "+" icon and select "Add MySQL Connection" (or similar UI element).</li>
+            <li>Enter:
+                <ul>
+                    <li><strong>Connection Name:</strong> A display name (e.g., "My Remote DB").</li>
+                    <li><strong>Host:</strong> Server hostname/IP (e.g., "mysql.example.com").</li>
+                    <li><strong>Port:</strong> Default 3306.</li>
+                    <li><strong>Username:</strong> MySQL user (e.g., "dbuser").</li>
+                    <li><strong>Password:</strong> MySQL password.</li>
+                    <li><strong>Database Name:</strong> The specific database to connect to (e.g., "mydatabase").</li>
+                    <li><strong>Use SSL:</strong> Toggle for secure connections (recommended).</li>
+                    <li><strong>CA Certificate, Client Certificate, Client Key:</strong> Optional PEM-encoded certs for SSL (paste or load from files).</li>
+                    <li><strong>Server API Key:</strong> Must match the key in my_database_api.php on your server (default '8888'—change it!).</li>
+                </ul>
+            </li>
+            <li>Tap "Add". Connections appear as ".mysql" entries in the database list.</li>
+            <li>Edit/Delete: Similar to SSH—use the "more" menu.</li>
+            <li>Connections are reordered by dragging.</li>
+        </ol>
+        
+        <h3>Working with MySQL Databases</h3>
+        <ul>
+            <li>Tap a MySQL database from the list to open its tables.</li>
+            <li>Features mirror SQLite: Browse tables, add/rename/duplicate/delete tables, run SQL queries, manage posts (add/edit/delete), search/filter/sort.</li>
+            <li><strong>Images:</strong> Posts can have images uploaded to the server (via the API). View, add, reorder, or delete images per post.
+                <ul>
+                    <li>When adding images: Select from gallery/camera; thumbnails are auto-generated.</li>
+                    <li>Images are stored on the server in <code>/my_database_images/{database}/{table}/{post_id}/</code> (e.g., "001_image.jpg" and "001_image_thumb.jpg").</li>
+                </ul>
+            </li>
+            <li><strong>SQL Queries:</strong> Use the SQL screen to run queries (SELECT, INSERT, etc.). Paginated results for large datasets.</li>
+            <li><strong>Default Database/Table:</strong> Set a MySQL DB/table as default for quick access.</li>
+        </ul>
+        
+        <h3>Battery Optimization for MySQL</h3>
+        <p>Similar to SSH: Disable battery optimization to prevent disconnections in the background (e.g., during long queries or uploads).</p>
+    </div>
+    
+    <div class="section">
+        <h2>Server-Side Installation for MySQL (Required only for images)</h2>
+        <p>To enable full MySQL functionality (especially images), set up a PHP script on your server. This API handles image uploads/lists/deletes/reorders, as the app can't directly access server files.</p>
+        
+        <h3>Steps to Install</h3>
+        <h4>1. Upload the PHP Script</h4>
+        <ul>
+            <li>Download the PHP script as <a href="https://bocoapps.github.io/my-database/my_database_api.php">.php</a> or <a href="https://bocoapps.github.io/my-database/my_database_api.zip">.zip</a>. You can also find it at the <a href="https://github.com/BocoApps/bocoapps.github.io/tree/main/my-database">My Database GitHub repository</a>.</li>
+            <li>Upload it to your web server (e.g., via FTP/SSH to <code>/var/www/html/</code> or a subdomain).</li>
+            <li>Ensure the server supports PHP (e.g., Apache/Nginx with PHP 7+).</li>
+            <li>The script's URL becomes your "API Base URL" (e.g., "https://example.com/my_database_api.php").</li>
+        </ul>
+        
+        <h4>2. Create Images Folder</h4>
+        <ul>
+            <li>Next to <code>my_database_api.php</code>, create a folder named <code>my_database_images</code>.</li>
+            <li>Set permissions: Make it writable by PHP (e.g., <code>chmod 755 my_database_images</code> or via hosting panel).</li>
+            <li>This folder stores uploaded images hierarchically: <code>{database}/{table}/{post_id}/{images}</code>.</li>
+        </ul>
+        
+        <h4>3. Change the API Key</h4>
+        <ul>
+            <li>In <code>my_database_api.php</code>, find <code>$API_KEY = '8888';</code>.</li>
+            <li>Change '8888' to a strong, random string (e.g., generate via password tool: 'xY9zA8bC7dE6fG5hJ4kL3mN2oP1qR0sT').</li>
+            <li>This key must match what you enter in the app's MySQL connection settings.</li>
+            <li><strong>Security Warning:</strong> Use a very strong key! Without it, anyone could access/upload/delete images.</li>
+        </ul>
+        
+        <h4>4. SSL Certificate</h4>
+        <ul>
+            <li>Use HTTPS (enable SSL on your server).</li>
+            <li>If using a self-signed or unrecognized certificate, images may not load (Android blocks insecure connections). Get a free Let's Encrypt cert or a paid one.</li>
+        </ul>
+        
+        <h4>5. Test the API</h4>
+        <ul>
+            <li>Access <code>https://yourserver.com/my_database_api.php?action=list_images&db=test&table=test&post=1&key=YOUR_KEY</code>.</li>
+            <li>It should return JSON like <code>{"success":true,"message":"","data":{"images":[]}}</code>.</li>
+            <li>In the app, when adding a MySQL connection, enter the API key and test by uploading an image to a post.</li>
+        </ul>
+    </div>
+   
+    <p><a href="/my-database">My Database</a> | <a href="/index.html">Boco Apps</a></p>
+</body>
+</html>
