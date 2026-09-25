@@ -38,6 +38,15 @@
         a:hover {
             text-decoration: underline;
         }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        pre code {
+            padding: 0;
+        }
         code {
             background: #f4f4f4;
             padding: 2px 4px;
@@ -251,7 +260,7 @@
                     <li><strong>Database Name:</strong> The specific database to connect to (e.g., "mydatabase").</li>
                     <li><strong>Use SSL:</strong> Toggle for secure connections (recommended).</li>
                     <li><strong>CA Certificate, Client Certificate, Client Key:</strong> Optional PEM-encoded certs for SSL (paste or load from files).</li>
-                    <li><strong>Server API Key:</strong> Must match the key in my_database_api.php on your server (default '8888'—change it!).</li>
+                    <li><strong>Server API Key:</strong> The key you set in <code>$API_KEYS</code> in my_database_api.php on your server, at least 16 characters. Needed only for pictures; see Server Setup for Pictures below.</li>
                 </ul>
             </li>
             <li>Tap "Add". Connections appear as ".mysql" entries in the database list.</li>
@@ -278,47 +287,77 @@
     </div>
     
     <div class="section">
-        <h2>Server-Side Installation for MySQL (Required only for images)</h2>
-        <p>To enable full MySQL functionality (especially images), set up a PHP script on your server. This API handles image uploads/lists/deletes/reorders, as the app can't directly access server files.</p>
-        
-        <h3>Steps to Install</h3>
-        <h4>1. Upload the PHP Script</h4>
-        <ul>
-            <li>Download the PHP script as <a href="https://bocoapps.github.io/my-database/my_database_api.php">.php</a> or <a href="https://bocoapps.github.io/my-database/my_database_api.zip">.zip</a>. You can also find it at the <a href="https://github.com/BocoApps/bocoapps.github.io/tree/main/my-database">My Database GitHub repository</a>.</li>
-            <li>Upload it to your web server (e.g., via FTP/SSH to <code>/var/www/html/</code> or a subdomain).</li>
-            <li>Ensure the server supports PHP (e.g., Apache/Nginx with PHP 7+).</li>
-            <li>The script's URL becomes your "API Base URL" (e.g., "https://example.com/my_database_api.php").</li>
-        </ul>
-        
-        <h4>2. Create Images Folder</h4>
-        <ul>
-            <li>Next to <code>my_database_api.php</code>, create a folder named <code>my_database_images</code>.</li>
-            <li>Set permissions: Make it writable by PHP (e.g., <code>chmod 755 my_database_images</code> or via hosting panel).</li>
-            <li>This folder stores uploaded images hierarchically: <code>{database}/{table}/{post_id}/{images}</code>.</li>
-        </ul>
-        
-        <h4>3. Change the API Key</h4>
-        <ul>
-            <li>In <code>my_database_api.php</code>, find <code>$API_KEY = '8888';</code>.</li>
-            <li>Change '8888' to a strong, random string (e.g., generate via password tool: 'xY9zA8bC7dE6fG5hJ4kL3mN2oP1qR0sT').</li>
-            <li>This key must match what you enter in the app's MySQL connection settings.</li>
-            <li><strong>Security Warning:</strong> Use a very strong key! Without it, anyone could access/upload/delete images.</li>
-        </ul>
-        
-        <h4>4. SSL Certificate</h4>
-        <ul>
-            <li>Use HTTPS (enable SSL on your server).</li>
-            <li>If using a self-signed or unrecognized certificate, images may not load (Android blocks insecure connections). Get a free Let's Encrypt cert or a paid one.</li>
-        </ul>
-        
-        <h4>5. Test the API</h4>
-        <ul>
-            <li>Access <code>https://yourserver.com/my_database_api.php?action=list_images&db=test&table=test&post=1&key=YOUR_KEY</code>.</li>
-            <li>It should return JSON like <code>{"success":true,"message":"","data":{"images":[]}}</code>.</li>
-            <li>In the app, when adding a MySQL connection, enter the API key and test by uploading an image to a post.</li>
-        </ul>
+        <h2>Server Setup for Pictures (my_database_api.php)</h2>
+<h3>What it is</h3>
+<p>Pictures on a MySQL database cannot live in MySQL, so they are kept as files on your web server, in a folder called <code>my_database_images</code>. The app reaches them through one PHP file, <code>my_database_api.php</code>. Rows and tables work without it; only pictures need it.</p>
+<p>My Database and My Database Pro use the same file, so a server set up for one works with the other.</p>
+
+<h3>1. Download and upload the file</h3>
+<ul>
+  <li>Download <a href="https://bocoapps.github.io/my-database/my_database_api.php">my_database_api.php</a> (or as a <a href="https://bocoapps.github.io/my-database/my_database_api.zip">.zip</a>). It is also in the <a href="https://github.com/BocoApps/bocoapps.github.io/tree/main/my-database">GitHub repository</a>.</li>
+  <li>Upload it to your web server's public folder (for example <code>public_html/</code>, <code>htdocs/</code> or <code>/var/www/html/</code>).</li>
+  <li>The server needs PHP 7.1 or newer. Apache, LiteSpeed and nginx all work.</li>
+</ul>
+
+<h3>2. The pictures folder</h3>
+<ul>
+  <li>The file keeps pictures in <code>my_database_images/</code> next to itself, as <code>{database}/{table}/{record id}/</code>.</li>
+  <li>It creates the folder on the first upload if PHP may write to the web folder. If it may not, create <code>my_database_images</code> yourself and make it writable by PHP (on most shared hosting it already is; otherwise <code>chmod 775</code>).</li>
+</ul>
+
+<h3>3. Set your API key</h3>
+<p>The file ships with <strong>no key</strong> and refuses every request until you add one. Open it and find:</p>
+<pre><code>$API_KEYS = [
+    // 'put-a-long-random-string-here' =&gt; 'admin',
+];</code></pre>
+<p>Add a line with your own key and a role:</p>
+<pre><code>$API_KEYS = [
+    'c3f9a1e07b5d42e8a6f0b91d7c2e4a58f1b6d9e3' =&gt; 'admin',
+];</code></pre>
+<ul>
+  <li>A key must be <strong>at least 16 characters</strong>; a shorter one is refused. Use a long random string, not a word. <code>php -r "echo bin2hex(random_bytes(24));"</code> makes one, or use a password manager.</li>
+  <li>Type the same key into the app, in the MySQL connection's <strong>Server API Key</strong> field.</li>
+  <li>You can add more than one key, one per person or phone, each with its own role:
+    <ul>
+      <li><strong>admin</strong>: everything.</li>
+      <li><strong>uploader</strong>: see, add and reorder pictures, and delete only the pictures it added itself.</li>
+      <li><strong>viewer</strong>: see pictures only.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>4. Use HTTPS</h3>
+<ul>
+  <li>Give the server a certificate (Let's Encrypt is free). The key travels with every request, and over plain HTTP anyone on the way can read it.</li>
+  <li>A certificate is issued for a name, not an IP address, so reach the server by its name.</li>
+</ul>
+
+<h3>5. Test it</h3>
+<p>The app sends the key in an <code>X-Api-Key</code> header, never in the address, so a browser cannot test the file. From a computer:</p>
+<pre><code>curl -H "X-Api-Key: YOUR_KEY" "https://yourserver.com/my_database_api.php?action=list_images&amp;db=test&amp;table=test&amp;post=1"</code></pre>
+<ul>
+  <li>The answer should be <code>{"success":true,"message":"","data":{"images":[]}}</code>.</li>
+  <li><code>Invalid or missing API key</code> means the key is missing from the file, shorter than 16 characters, or not the same as the one you sent.</li>
+  <li>Then, in the app, add a picture to a record on that connection.</li>
+</ul>
+
+<h3>What the file protects on its own</h3>
+<ul>
+  <li>It accepts only picture files (JPEG, PNG, WebP, GIF, BMP, HEIC), checked by name and by content.</li>
+  <li>It writes an <code>.htaccess</code> into each table's folder so nothing there can run as a script, and keeps its own bookkeeping files from being downloaded. (nginx ignores <code>.htaccess</code>; the checks on every upload still apply.)</li>
+  <li>Anything that changes the server has to be a POST, so a link opened by a crawler or a link preview cannot delete pictures.</li>
+</ul>
+
+<h3>Upgrading from the older file</h3>
+<p>If your server runs the older <code>my_database_api.php</code> (the one with <code>$API_KEY = '8888';</code>):</p>
+<ul>
+  <li>Replace it with the new file and set a key in <code>$API_KEYS</code> as in step 3, at least 16 characters. <code>8888</code> no longer works.</li>
+  <li>Put the same key into each MySQL connection in the app.</li>
+  <li>Pictures already on the server stay where they are. Nothing needs moving.</li>
+  <li>The new file needs <strong>My Database 1.2.8 or newer</strong>, or any version of My Database Pro. Version 1.2.7 and older send the key in the address, which the new file does not accept, so they show no pictures until the app is updated.</li>
+</ul>
     </div>
-   
+
     <p><a href="/my-database">My Database</a> | <a href="/index.html">Boco Apps</a></p>
 </body>
 </html>

@@ -1,324 +1,1715 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Database Pro</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        h1, h2, h3, h4 {
-            color: #007bff;
-            text-align: center;
-        }
-        p, ul, ol {
-            max-width: 800px;
-            text-align: left;
-        }
-        .section {
-            max-width: 800px;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-        a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        code {
-            background: #f4f4f4;
-            padding: 2px 4px;
-            border-radius: 4px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Database Pro — How to</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #5a6472;
+    --accent: #1a6fd8;
+    --card: #f4f7fb;
+    --border: #dde3ec;
+    --code-bg: #0f1720;
+    --code-fg: #e6edf3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0 0 60px;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.55;
+  }
+  main { max-width: 860px; margin: 0 auto; padding: 0 18px; }
+  nav.toc {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 24px 0;
+  }
+  nav.toc h2 { margin-top: 0; font-size: 16px; }
+  nav.toc ol { margin: 0; padding-left: 20px; columns: 2; }
+  nav.toc a { color: var(--accent); text-decoration: none; font-size: 14px; }
+  nav.toc a:hover { text-decoration: underline; }
+  section { margin: 34px 0; }
+  main > section:first-child { margin-top: 18px; }
+  h2 {
+    font-size: 20px;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 6px;
+    margin-bottom: 14px;
+  }
+  h3 { font-size: 16px; color: var(--accent); margin: 20px 0 8px; }
+  p { margin: 8px 0; }
+  ul { padding-left: 22px; }
+  li { margin: 4px 0; }
+  .tag {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 999px;
+    margin-right: 6px;
+  }
+  .note {
+    background: var(--card);
+    border-left: 4px solid var(--accent);
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    margin: 10px 0;
+  }
+  code, .kbd {
+    background: var(--code-bg);
+    color: var(--code-fg);
+    font-family: 'Courier New', monospace;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-fg);
+    padding: 14px 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 13px;
+  }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 14px; }
+  th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; }
+  th { background: var(--card); }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 50px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1115;
+      --fg: #e7ebf0;
+      --muted: #9aa4b2;
+      --card: #171b22;
+      --border: #262c36;
+    }
+  }
+</style>
 </head>
 <body>
-    <h1>My Database Pro</h1>
-    <p><a href="/my-database-pro">My Database Pro</a> | <a href="/index.html">Boco Apps</a></p>
-   
-    <div class="section">
-        <h2>Tutorial</h2>
-        <p>This How-To provides a step-by-step guide to using all features of <strong>My Database</strong> on your smartphone. The app opens on the Databases screen by default (or loads the default database/table if configured). Navigation is intuitive, using buttons, long-press gestures for options, and dialogs for inputs.</p>
-        <p><strong>Note:</strong> The app requests permissions for storage, photos, and camera as needed—grant them for full functionality. If denied, enable them in your phone's settings. For Android 11+, enable "All files access" in the app's settings for imports/exports. Heavy tasks like exports/imports run in background isolates to display progress and prevent UI freezes.</p>
-       
-        <h3>Getting Started and Settings</h3>
+
+<main>
+
+<p><a href="/my-database-pro">My Database Pro</a> | <a href="/index.html">Boco Apps</a></p>
+
+<section>
+  <h2>What is My Database Pro?</h2>
+  <p>
+    <strong>My Database Pro</strong> is an all-in-one mobile tool for creating,
+    browsing and managing databases directly on your phone — with no server
+    required to get started. It combines a full local SQLite database manager,
+    a remote MySQL client, a photo-capable record editor, an SQL console, a
+    multi-tab code editor with a real built-in PHP interpreter, a web browser
+    view, an SSH terminal, and an AI assistant that can write and run SQL for
+    you in plain language — all in a single app.
+  </p>
+  <div class="note">
+    <strong>The AI assistant runs on an account of your own.</strong> The app
+    carries no API key and sells no access to a model: you sign up with a
+    provider, create a key there and paste it in — or point the app at a model
+    running on your own machine, which costs nothing and never leaves your
+    network. Section 14 says how. Everything else in this list works with no
+    account of any kind.
+  </div>
+  <p>
+    A database created in the app can also be turned into a fully working
+    website with one tap: the app generates a ready-to-use PHP page that
+    displays your data as searchable, image-rich cards on any web server you
+    own, complete with its own AI search box.
+  </p>
+  <p>
+    The app is translated into 50 languages, and the language can be chosen
+    independently of the phone's own.
+  </p>
+  <p>
+    This page covers every screen and feature. The same page is inside the app:
+    <strong>Setup › How to</strong> opens it, with no connection needed.
+  </p>
+</section>
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#toolrow">The Tool Row</a></li>
+    <li><a href="#main-screen">Main Screen — Your Databases</a></li>
+    <li><a href="#tables">Tables Screen</a></li>
+    <li><a href="#records">Records (Posts) Screen</a></li>
+    <li><a href="#sql-editor">SQL Query</a></li>
+    <li><a href="#mysql">MySQL Connections</a></li>
+    <li><a href="#import-export">Import &amp; Export</a></li>
+    <li><a href="#backup">Backup &amp; Restore</a></li>
+    <li><a href="#publish">Publish to Web (PHP Viewer)</a></li>
+    <li><a href="#sftp">Servers — SFTP &amp; FTP</a></li>
+    <li><a href="#code-editor">Code Editor &amp; PHP Interpreter</a></li>
+    <li><a href="#webview">Web View</a></li>
+    <li><a href="#ssh">SSH Terminal</a></li>
+    <li><a href="#ai">AI Chat Assistant</a></li>
+    <li><a href="#settings">Setup (Settings)</a></li>
+    <li><a href="#security">Security &amp; Your Data</a></li>
+    <li><a href="#tips">Tips &amp; Good Habits</a></li>
+    <li><a href="#server-api">Server Setup for Pictures</a></li>
+  </ol>
+</nav>
+
+<section id="toolrow">
+  <h2>1. The Tool Row</h2>
+  <p>
+    Every screen in the app carries the same row of buttons: <strong>Home</strong>
+    and the five tools. The buttons never move, so wherever you are, the one you
+    want is under the same thumb.
+  </p>
+  <table>
+    <tr><th>Button</th><th>Goes to</th></tr>
+    <tr><td>Home</td><td>Straight out to the database list, however deep you are.</td></tr>
+    <tr><td>SQL Query</td><td>The SQL console, on whichever database you last used it.</td></tr>
+    <tr><td>AI Chat</td><td>The assistant.</td></tr>
+    <tr><td>Editor</td><td>The multi-tab code editor.</td></tr>
+    <tr><td>Web View</td><td>The in-app browser, on the page you last read.</td></tr>
+    <tr><td>Terminal</td><td>The SSH terminal, reconnecting to the last connection.</td></tr>
+  </table>
+  <h3>Two things worth knowing</h3>
+  <ul>
+    <li><strong>The row moves.</strong> Hold a finger on it and drag, the same
+        gesture that reorders the database list, and it docks at the top or at
+        the bottom of the screen — whichever end you let go on. Where you put it
+        is remembered, and every screen follows.</li>
+    <li><strong>It returns rather than restacks.</strong> Pressing Editor while
+        an editor is already open drops back onto that live screen with all its
+        tabs and unsaved text intact, instead of opening a second one on top.
+        The same is true of every tool. That is also why the trip is instant.</li>
+  </ul>
+  <p>
+    The button for the screen you are on is drawn with a filled background —
+    since the row is identical everywhere, that patch of colour is what tells
+    you where you are.
+  </p>
+  <div class="note">
+    Setup is deliberately <em>not</em> on the row. It is not a tool, and it is
+    wanted about as often as a new database is, so it lives in the database
+    list's own title bar next to the buttons that add one. It is a screen of
+    its own, so the tool row stays on it.
+  </div>
+</section>
+
+<section id="main-screen">
+  <h2>2. Main Screen — Your Databases</h2>
+  <p>
+    The app's home screen. It lists every database you have: local SQLite
+    databases (shown with a database icon) and remote MySQL connections (shown
+    with a cloud icon).
+  </p>
+  <h3>Title bar</h3>
+  <ul>
+    <li><span class="tag">+</span> Creates a new local SQLite database, or adds a MySQL connection.</li>
+    <li><span class="tag">Import</span> Imports from a CSV file, a ZIP archive (database plus its images), or a plain <code>.db</code> SQLite file.</li>
+    <li><span class="tag">Setup</span> The app-wide settings screen — see section 15.</li>
+  </ul>
+  <h3>Managing the list</h3>
+  <ul>
+    <li>Long-press and drag a database to reorder the list. That order is used
+        everywhere else too, including the database picker inside SQL Query.</li>
+    <li>The three-dot menu on each database offers: rename, duplicate, delete,
+        and a password. A MySQL connection has <strong>Edit Connection</strong>
+        in place of rename. Which table opens automatically at app start is set
+        on the table itself: <strong>Table Options</strong> →
+        <strong>Set as Default</strong>.</li>
+    <li><strong>The password means two different things, and the menu says
+        which.</strong> On a local database it is SQLCipher: the
+        file itself is encrypted and without the password there is nothing to
+        read. On a MySQL connection it is the <em>connection lock</em> — one
+        key over the screens that show your logins, which is section 16 — and
+        the menu says <strong>Lock with password</strong> and
+        <strong>Remove lock</strong> there. Both draw the same padlock on the
+        row.</li>
+    <li><strong>A MySQL connection can have a second password, over its
+        form alone.</strong> At the bottom of <strong>Edit Connection</strong>,
+        under the heading of the same name: <strong>Add Password</strong>.
+        Once it is set, Edit Connection and Delete ask for that password and
+        no longer for the connection's own — so you can lend somebody the
+        database with the connection's password, and they can open it but
+        cannot read the host, the user or the password it logs in with.</li>
+  </ul>
+  <h3>Sort by — which column a table is listed by</h3>
+  <p>
+    On a table's own three-dot menu, <strong>Table Options</strong>, on the
+    screen you reach by opening a database. It sets which column each table of this database
+    is listed by in the Records screen, and in which direction.
+  </p>
+  <ul>
+    <li><strong>It is per table, not per database.</strong> Your tables have
+        different columns, so one name for the whole database would work on some
+        tables and quietly do nothing on the rest. Each table's menu sets that
+        table's order and leaves the others as they are.</li>
+    <li><strong>Pick a date column and it suggests newest first.</strong> That
+        is almost always what a date is wanted for — otherwise today's edit
+        lands at the bottom of a long list and it looks as though nothing
+        happened. It is only a suggestion: change the direction and your choice
+        sticks.</li>
+    <li>The published PHP pages follow it too — see section 9.</li>
+    <li>The setting lives on this phone, next to the column visibility, and it
+        travels in a backup. An <code>ORDER BY</code> you type into the Records
+        screen's <span class="kbd">&lt;&gt;</span> search still wins — it is the
+        more specific instruction.</li>
+  </ul>
+  <h3>Display — how this database's records are drawn</h3>
+  <p>
+    On the three-dot menu at the top right of the screen with the tables, with
+    Export Database and Import — not in Table Options, because it is one
+    setting for every table of the database.
+    Three settings,
+    each about this database only.
+  </p>
+  <ul>
+    <li><strong>Show all posts on open</strong> — whether opening a table
+        fills the list straight away, or waits for you to search. On a table of
+        a few hundred records with photos, waiting is the faster screen.</li>
+    <li><strong>Show images</strong> — whether the strip of thumbnails is
+        drawn at all. Off is how one database shows plain rows while another
+        still shows its pictures.</li>
+    <li><strong>Thumbnails</strong> — how big they are, 50% to 300%.</li>
+  </ul>
+  <div class="note">
+    <strong>These used to be in Setup, for every database at once.</strong>
+    That is why they moved: turning the pictures off for a table of printers
+    took them off Chinook too. A database you have never opened this screen for
+    keeps whatever those old app-wide settings were, so nothing changes by
+    itself. Like <strong>Sort by</strong>, the choice lives on this phone, it
+    travels in a backup, and it follows the database through a rename.
+  </div>
+  <div class="note">
+    A fresh install arrives with two sample databases already unpacked —
+    <strong>Chinook</strong> (the classic music-store sample, good for
+    practising SQL) and <strong>Animals</strong> (a small picture database that
+    shows what image support looks like).
+  </div>
+</section>
+
+<section id="tables">
+  <h2>3. Tables Screen</h2>
+  <p>Tapping a database opens its list of tables. From here you can:</p>
+  <ul>
+    <li>Create a new table with <strong>+</strong> in the title bar; rename,
+        duplicate, sort or delete one from its own three-dot menu,
+        <strong>Table Options</strong>.</li>
+    <li>Reorder tables by long-press and drag.</li>
+    <li>Open any table to view and manage its records.</li>
+    <li>The three-dot menu at the top right has <strong>Export
+        Database</strong>, <strong>Import</strong> (a CSV into this database)
+        and <strong>Display</strong>.</li>
+    <li>The <code>&lt;&gt;</code> on the tool row opens <strong>SQL
+        Query</strong> on the database you are in. The database's name on the
+        line under the title bar is a menu: tapping it switches to another
+        database without going back.</li>
+  </ul>
+  <div class="note">
+    If a database is password-protected, you will be asked for the password
+    before its tables are shown.
+  </div>
+</section>
+
+<section id="records">
+  <h2>4. Records (Posts) Screen</h2>
+  <p>
+    Opening a table shows its records. Depending on a setting, records are shown
+    either 100 at a time with paging, or all at once.
+  </p>
+  <h3>Working with records</h3>
+  <ul>
+    <li>Add, edit and delete records. Each record is made of text fields (the
+        table's columns) and can also carry one or more attached photos.</li>
+    <li>Photos can be added from the gallery or straight from the camera. EXIF
+        rotation is corrected automatically, so a photo taken sideways is stored
+        the right way up, and a thumbnail is generated for the list.</li>
+    <li>Several photos can be picked at once. Thumbnails appear inline; tapping
+        one opens a full-screen viewer with pinch-zoom and swipe between photos.</li>
+    <li><strong>Hold a photo and move your finger</strong> to drag it into a
+        different position.</li>
+    <li><strong>Hold a photo and let go without moving</strong> to select it —
+        it darkens and gets a red tick. While photos are selected, a tap selects
+        or unselects another instead of opening it, so you can pick one, several
+        or all of them. The bar under the photos shows how many are selected:
+        the red bin on the left deletes them all at once, after asking once,
+        and the ✕ on the right cancels. The camera button is hidden while you
+        are selecting, so the bin is never beside it. Selecting works on one
+        record at a time, and moving a photo clears the selection.</li>
+    <li>Images live in a folder beside the database and are referenced from an
+        <code>image_paths</code> column, so they travel with a ZIP export.</li>
+    <li><strong>Changing the photos updates the record's date.</strong> Adding,
+        removing or reordering one changes a file rather than a column, so the
+        database would otherwise never notice — and a record sorted newest-first
+        has to move when its pictures change. If the table has an
+        <code>updated_at</code> column, the app stamps it.</li>
+  </ul>
+  <h3>What a card shows</h3>
+  <p>
+    A card draws the columns you chose, in the order you dragged them into.
+    That choice is on the <strong>Columns</strong> view — the same screen that
+    adds and renames columns — where every row carries an <strong>eye</strong>:
+    press it and that column is off the card, press it again and it is back.
+  </p>
+  <ul>
+    <li><strong>Camera and delete</strong> is the last row of that list, and it
+        is the two buttons the card draws in its own corners: the
+        <strong>✕</strong> that deletes the record and the
+        <strong>camera</strong> that adds a picture to it. On a table that is
+        read rather than edited they are two buttons in the way of every
+        record — one eye puts both down. Press it again when you want them
+        back, because the corners are where those two live.</li>
+    <li>It is kept per table on this phone, beside the other things about the
+        record list, and it follows a table rename, a duplicate and a
+        backup.</li>
+  </ul>
+  <h3>What you can do with a picture</h3>
+  <p>
+    Tap a thumbnail and the picture opens full screen. The
+    <strong>⋮</strong> in the corner there is the way back out of the app with
+    it — for a long time there was none, and a photograph put into a record
+    was a photograph that could not leave it.
+  </p>
+  <ul>
+    <li><strong>Share</strong> — the phone's own share sheet: a message, mail,
+        another app.</li>
+    <li><strong>Save to Device</strong> — saves it where you choose, and a
+        <code>.jpg</code> lands in the gallery's own listing rather than among
+        files nothing knows what to do with.</li>
+    <li><strong>Send to a server</strong> — the same two questions every
+        upload asks, which server and which folder, and the same progress
+        bar.</li>
+  </ul>
+  <div class="note">
+    All three work the same on a MySQL record, where the picture is on the
+    server: it is fetched first, used, and the fetched copy is tidied away
+    afterwards. Your own photograph on the phone is never moved or renamed —
+    only copied.
+  </div>
+  <h3>Filling a field without typing</h3>
+  <p>
+    Two readers are offered on every box you can type in — when you edit a
+    cell, and in the add-a-record dialog, where several fields are filled at
+    once. Each offers the camera or a picture already on the phone, the same
+    two words the record's photos use.
+  </p>
+  <ul>
+    <li><strong>Scan a code.</strong> A QR square, an EAN or UPC barcode,
+        Code&nbsp;128 — whatever the scanner recognises — and the value it
+        holds goes into the box. It is offered on <em>every</em> field, not
+        just one called something in particular: a code is an ordinary value
+        once it has been read, and copying one off a label by hand is the thing
+        worth avoiding.</li>
+    <li><strong>Read text off a photograph.</strong> Point it at a label and
+        the app lists the lines it found; pick the one you took the photograph
+        for. <strong>All of it</strong> is the first row when you want the
+        whole thing. A single line goes straight in without asking.</li>
+    <li><strong>A picture already on the record is a third place to read
+        from.</strong> The label is very often photographed into the record
+        already, and going back to the camera to read it is photographing the
+        same thing twice. That row is offered only on a record that has
+        pictures — the add-a-record dialog has no record yet, so it does
+        not.</li>
+  </ul>
+  <div class="note">
+    <strong>A reading is added, never put in place of what is there.</strong>
+    It goes in at the caret and on a line of its own, so a box holding
+    <code>Data</code> and a scan of <code>maliki</code> comes back as the two
+    of them, one per line, rather than as <code>Datamaliki</code>. Read into
+    an empty box it is just the reading.
+  </div>
+  <div class="note">
+    <strong>Camera or gallery is one sheet, and its rows can be dragged.</strong>
+    Hold a row and move it: the one you reach for lands at the top and stays
+    there. Each sheet keeps its own order, because they are different
+    decisions — a code reader is answered with the camera almost every time,
+    and "add a picture" almost never is.
+  </div>
+  <div class="note">
+    <strong>Both read into the box, never into the row.</strong> Nothing is
+    saved until you press Save, exactly as if you had typed it — so a code
+    that scanned wrongly is one you can correct or throw away, and a QR square
+    holding a few thousand characters cannot write itself into your table.
+  </div>
+  <h3>Codes drawn from a column</h3>
+  <p>
+    Beside those two there are two more, and they work the other way round:
+    they take what is <em>in</em> the field and draw it.
+  </p>
+  <ul>
+    <li><strong>Barcode</strong> — EAN-13 or EAN-8 when the value is one,
+        Code&nbsp;128 otherwise. A shelf label: a scanner at a till, a number
+        read at arm's length.</li>
+    <li><strong>QR code</strong> — holds far more and is read by any phone,
+        which is what a link, an address or a whole line of text wants.</li>
+  </ul>
+  <p>
+    The app never guesses which you want: the same article number is a fair
+    answer to both, and which one is wanted is a question about the table.
+    From the picture either one shows you:
+  </p>
+  <ul>
+    <li><strong>Show on card</strong> — pins the barcode under that column on
+        every record of the table, so a shelf label or a serial number can be
+        scanned straight off the screen. Tap it again on a record and it comes
+        off. Kept on this phone, per table, and it follows a column rename and
+        a table rename.</li>
+    <li><strong>Add as image</strong> — attaches a PNG of the barcode to this
+        record's photos, where it travels with the record like any other
+        picture.</li>
+  </ul>
+  <div class="note">
+    <strong>Show on card</strong> stores no picture. Flutter draws the code
+    from the cell's text every time the row is drawn, so correcting the value
+    corrects the code with it. <strong>One code under a column, not two</strong>
+    — picking the other kind replaces it, because two stacked under one cell
+    is a card nobody can read. Black on white whatever the theme — a scanner
+    does not read a dark mode. A value nothing can be encoded from says so
+    rather than drawing something a scanner would refuse.
+  </div>
+  <div class="note">
+    <strong>Every QR is drawn with 15% error correction</strong>, not the 7%
+    that would fit more in. These end up on labels in corridors, where a code
+    is scuffed and rubbed at for years — and 2331 bytes is far more room
+    than one record needs. One whole record of a real printer table measured
+    154 bytes, so fifteen of them would still fit in one square.
+  </div>
+  <div class="note">
+    <strong>The cell editor is a list of rows, not a strip of icons.</strong>
+    Scan a code, Read text, Barcode, QR code — each with its name beside it,
+    and Cancel and Save at the foot where every other dialog puts them. The
+    two that read <em>into</em> the box come first and the two that draw
+    <em>from</em> it after, which is the order a value moves. The
+    add-a-record dialog has a field per column and often a dozen of them, so
+    it carries <strong>two icons under its title</strong> instead — Scan a
+    code and Read text, acting on the field you are typing in. Only the two
+    that read something in: a barcode is drawn <em>from</em> a value, and in
+    that dialog there is no value yet. Its boxes <strong>grow with what is
+    typed into them</strong>, up from one line, so a description of three
+    lines is three lines you can see — and a reading off a photograph, which
+    arrives as several, is not hidden in a box one line tall.
+  </div>
+  <h3>Columns the app fills in for you</h3>
+  <ul>
+    <li><strong>A column with a fixed list of values is picked from, never typed
+        into.</strong> If a MySQL column is declared as an <code>enum</code>, the
+        app shows you its values to choose from. This matters more than it
+        looks: MySQL outside strict mode does not reject a value the list does
+        not have — it silently stores an empty string, and the cell you just
+        filled in comes back blank with nothing saying why.</li>
+    <li><strong>A column the database maintains is shown but not editable.</strong>
+        Any MySQL column set to update its own timestamp, and any column called
+        <code>updated_at</code>, is drawn greyed out and left out of the
+        add-a-record dialog. Anything you typed there would be overwritten on
+        the next edit anyway.</li>
+  </ul>
+  <h3>Search &amp; sort</h3>
+  <ul>
+    <li>The list comes back in the order you set with <strong>Sort by</strong>
+        on the database's own menu (see section 2) — newest first, where that is
+        a date. With nothing set, the rows still come back in a settled order,
+        so paging never shows you one record twice and hides another.</li>
+    <li>Search with filters: contains, equals, greater/less than, and between.</li>
+    <li>Sort ascending or descending by any column.</li>
+    <li>A search can also be written as SQL — the condition and the ordering are
+        taken from what you type and applied to the list, which keeps its own
+        paging and images.</li>
+    <li>Search results can be exported straight to CSV.</li>
+  </ul>
+  <h3>Column management</h3>
+  <p>
+    Columns can be added, renamed, deleted, retyped and reordered at any time,
+    without leaving this screen. Each row carries an <strong>eye</strong>,
+    which is what the card shows and not what may be done to it, and the last
+    row of the list — <strong>Camera and delete</strong> — is the two buttons
+    the card draws in its corners. See <em>What a card shows</em> above.
+  </p>
+  <h3>Column types</h3>
+  <p>The type dropdown offers five, and which five depends on the table:</p>
+  <table>
+    <tr><th>Ordinary table</th><th>STRICT table</th><th>Holds</th></tr>
+    <tr><td><code>TEXT</code></td><td><code>TEXT</code></td><td>Text. The default.</td></tr>
+    <tr><td><code>INTEGER</code></td><td><code>INTEGER</code></td><td>Whole numbers.</td></tr>
+    <tr><td><code>REAL</code></td><td><code>REAL</code></td><td>Numbers with decimals.</td></tr>
+    <tr><td><code>BLOB</code></td><td><code>BLOB</code></td><td>Binary data, stored exactly as given.</td></tr>
+    <tr><td><code>NUMERIC</code></td><td>—</td><td>A number where the value converts, text where it does not.</td></tr>
+    <tr><td>—</td><td><code>ANY</code></td><td>Anything, kept as it was given.</td></tr>
+  </table>
+  <p>
+    A <strong>STRICT</strong> table trades <code>NUMERIC</code> for
+    <code>ANY</code> and then enforces the column's type on every write. That is
+    SQLite's own rule rather than the app's. The dropdown switches by itself
+    once a table is STRICT, and turning STRICT on names any column whose type is
+    not allowed rather than failing with a raw database error.
+  </p>
+  <div class="note">
+    <strong>There is no date type.</strong> SQLite has none — and it silently
+    accepts any word you write as a type, so <code>DATE</code> is stored as
+    plain text just as <code>BANANA</code> would be. Keep dates in a
+    <code>TEXT</code> column in ISO order (<code>2026-08-27</code>,
+    <code>2026-08-27 14:30:00</code>) so that sorting and comparing work, or in
+    an <code>INTEGER</code> column as a Unix timestamp. On a MySQL connection it
+    is different: there <code>DATE</code> and <code>DATETIME</code> are real
+    types.
+  </div>
+  <p>
+    Changing an existing column's type rebuilds the table and copies the values
+    across without a <code>CAST</code>, so what fits is converted and what does
+    not is left alone — <code>'abc'</code> stays <code>'abc'</code> rather than
+    turning into <code>0</code>. The app then tells you how many values did not
+    take the new type. The primary key cannot be retyped: it carries
+    <code>AUTOINCREMENT</code>, which only survives on <code>INTEGER</code>.
+  </p>
+</section>
+
+<section id="sql-editor">
+  <h2>5. SQL Query</h2>
+  <p>
+    The SQL console, reachable from the tool row on any screen or from the SQL
+    button inside a database. It has syntax highlighting and takes any
+    statement:
+  </p>
+  <pre>SELECT, INSERT, UPDATE, DELETE, CREATE TABLE, ALTER TABLE, ...</pre>
+  <p>
+    Results of a <code>SELECT</code> are shown as a paged table, and can be
+    exported.
+  </p>
+  <h3>Two pickers in the title bar</h3>
+  <ul>
+    <li>The <strong>database picker</strong> switches which database the console
+        is pointed at — local files and saved MySQL connections alike, listed in
+        the same order as the main screen.</li>
+    <li>The <strong>table picker</strong> next to it rewrites the query box to
+        <code>SELECT * FROM `table`;</code> for the table you choose, which is
+        the quickest way to start looking at something.</li>
+  </ul>
+  <h3>Your query is kept</h3>
+  <p>
+    A half-written query is not lost when you step away to the Web View or the
+    editor and come back. The text stays in the box until you clear it, saved
+    per database — and per table when the screen was opened on one — so two
+    tables never hand each other the wrong query.
+  </p>
+  <p>
+    The <strong>SQL Query</strong> button on the tool row also remembers which
+    database you were last working on and returns you to it. The SQL button
+    <em>inside</em> a database deliberately does not: it opens on its own
+    database and leaves the remembered one alone, so a detour never moves where
+    the tool row comes back to.
+  </p>
+</section>
+
+<section id="mysql">
+  <h2>6. MySQL Connections</h2>
+  <p>
+    Add a remote MySQL server from the <span class="tag">+</span> button on the
+    main screen. Once added, a MySQL connection is browsed exactly like a local
+    database — same tables screen, same records screen, same SQL console —
+    except every statement runs on the remote server.
+  </p>
+  <h3>The fields</h3>
+  <p>
+    The form is in two named groups, because it does two different jobs.
+    <strong>MySQL</strong> is everything used to dial the database.
+    <strong>Pictures</strong> is everything reached over HTTP instead — the PHP
+    image API, the folder the photographs sit in, the two published pages, and
+    the server all of that is uploaded through. The connection's name is above
+    both, because it belongs to neither: it never reaches a server.
+  </p>
+  <table>
+    <tr><th>Field</th><th>What it is</th></tr>
+    <tr><td>Connection name</td><td>Whatever you want to call it in the list.
+        It may be the same as a database on the phone — a database's copy on
+        a server can carry the same name; the cloud in front of it tells the
+        two apart, and each keeps its own Sort by, columns and Display. Two
+        connections cannot share a name.</td></tr>
+    <tr><td colspan="2"><strong>MySQL</strong></td></tr>
+    <tr><td>Server IP/Host</td><td>The MySQL address — <code>name.duckdns.org</code> or <code>srv123.hstgr.io</code>. Never with <code>http://</code> or <code>https://</code> in front.</td></tr>
+    <tr><td>Port</td><td>Usually <code>3306</code>.</td></tr>
+    <tr><td>Username / Password</td><td>The MySQL account.</td></tr>
+    <tr><td>Database name</td><td>The schema to open.</td></tr>
+    <tr><td>Use SSL</td><td>Encrypts the MySQL connection. Also chooses <code>https</code> for the image API, but only when Image API host is empty and the address is an IP.</td></tr>
+    <tr><td>CA / client certificate, client key</td><td>Three optional PEM fields, shown only with Use SSL on. Leave empty for an ordinary public certificate — the app checks it. A server with a certificate of its own, such as Cloud SQL or anything behind a private authority, is best given that authority's certificate in <strong>CA certificate</strong>. A server that signs its own — a MariaDB at home usually does — is remembered the first time you connect and has to present the same certificate after that; if it ever changes, the app refuses and says so, because that is what something answering in the server's place looks like from here. Deleting the connection and adding it again is the way back after a server is genuinely rebuilt.</td></tr>
+    <tr><td colspan="2"><strong>Pictures</strong></td></tr>
+    <tr><td>Server API key</td><td>The key defined in <code>my_database_api.php</code> on your web server. Needed for images. <strong>Make it a long random string</strong> — the file ships with none and refuses every call until you set one, on purpose: anyone who knows the key can write into the pictures folder. <code>php -r "echo bin2hex(random_bytes(24));"</code> will make you one.</td></tr>
+    <tr><td>Image API host</td><td>Optional. Where <code>my_database_api.php</code> actually lives, when that is not the MySQL host. Empty, the API is assumed to sit on Server IP/Host — the usual shape. <strong>The line under this field is the address the app will really call</strong>, whichever of the two fields it was built from. It is shown here and nowhere else: under the MySQL host it would have named a machine that is not in that box.</td></tr>
+    <tr><td>Image folder</td><td>Optional. The folder your pictures sit in under <code>my_database_images/</code>. Empty, it is the database name — the usual shape. It exists because shared hosting often forces an account id into the database name (<code>u123456789_MyDb</code>), and that name would otherwise stand in every public image URL. The full address is previewed under the field.</td></tr>
+    <tr><td>The two pages</td><td>Not fields. <code>MyDb.php</code> and <code>MyDbai.php</code> as whole addresses: tap either row to copy it, or the globe beside it to open the page in the app's own Web View.</td></tr>
+    <tr><td>SFTP server</td><td>Which of the named servers in Setup this connection is paired with. It is the one an export offers first, the one a page refresh uploads the database through, and the one that clears the pictures away if you ever delete the connection with them. The picker asks <em>which</em> server, not whether — there is no "None" in it. A connection nobody has paired still reads None on the row, which is the state it is in rather than something anybody chose.</td></tr>
+  </table>
+  <div class="note">
+    <strong>Times read the same wherever your server is.</strong> The app puts
+    each MySQL connection on <em>this phone's</em> clock as soon as it connects,
+    so a server running on UTC in a data centre and one under your desk both
+    report a moment in the same words. Nothing already stored is changed — MySQL
+    keeps a <code>TIMESTAMP</code> in UTC and converts it on the way in and out.
+    Note that only <code>TIMESTAMP</code> works this way; a <code>DATETIME</code>
+    column is never converted by anything.
+  </div>
+  <div class="note">
+    <strong>A dropped connection is redialled.</strong> Shared hosts hang up on
+    an idle connection within minutes, which used to break a long export halfway
+    through. Now the app simply dials again and repeats the read. Only reads —
+    an insert that reached the server but lost its reply is never sent twice.
+  </div>
+  <h3>Use SSL — and what it changes</h3>
+  <p>
+    With Image API host empty, the <strong>Use SSL</strong> switch does two
+    things at once. It makes the MySQL connection itself encrypted, and it
+    decides the scheme used to reach the image API:
+  </p>
+  <pre>Use SSL ON   →  https://name.duckdns.org/my_database_api.php
+Use SSL OFF  →  http://name.duckdns.org/my_database_api.php</pre>
+  <p>
+    The line under <strong>Image API host</strong> shows that exact URL as you
+    type, so there is never any doubt about what the app will call. This is
+    also why Server IP/Host takes a bare address: the scheme is the switch's
+    job, and a host typed as <code>https://myserver.org</code> produces
+    <code>https://https://...</code> — which the preview shows you immediately.
+  </p>
+  <p>
+    Fill <strong>Image API host</strong> when the PHP file is not on the MySQL
+    machine — Cloud SQL has no PHP, and a shared host's MySQL hostname is not
+    the website. That same preview then follows this value instead:
+  </p>
+  <pre>https://example.com           →  https://example.com/my_database_api.php
+https://example.com/my_database_api.php  →  used as typed
+192.168.1.115                 →  http://192.168.1.115/my_database_api.php</pre>
+  <p>
+    A value that already has a scheme, or that already ends in
+    <code>.php</code>, is used as typed. A bare address is reached over HTTP:
+    the SSL switch is then only for MySQL's TLS, because a second host is
+    almost always an IP without a certificate.
+  </p>
+  <p>
+    If the server sends HTTP on to HTTPS, pictures still show but adding,
+    deleting or reordering them fails. The app then says <em>The image server
+    only answers over https</em> and names the address to use — type it into
+    Image API host with <code>https://</code> in front.
+  </p>
+  <div class="note">
+    If the PHP file sits on the MySQL host and that server only serves HTTPS,
+    images will not work with Use SSL off. A certificate is issued for a
+    <em>name</em>, not for an IP address, which is why a hostname is the better
+    thing to put in Server host for a public server that also serves the API.
+  </div>
+  <h3>Certificates</h3>
+  <p>
+    With Use SSL on, three optional fields appear: <strong>CA certificate</strong>,
+    <strong>client certificate</strong> and <strong>client key</strong>, each in
+    PEM form. A folder button beside each one picks the file from the phone.
+    Leave them empty for an ordinary public certificate; fill them in when your
+    server expects a private CA or client authentication.
+  </p>
+  <h3>Images on MySQL</h3>
+  <p>
+    A local database keeps its images in a folder on the phone. A MySQL database
+    cannot — so image folders live on your web server and are managed through
+    <code>my_database_api.php</code>, using the API key from the connection
+    dialog. Creating, renaming and duplicating a table keeps its image
+    folder in step. <strong>Dropping one does not delete its pictures on the
+    server</strong> — a photograph is the one thing no restore can invent, and
+    the folder is yours to clear out when you mean to (Files on a server, the
+    terminal, or your host's file manager). On the phone, where the folder is
+    inside the app's own storage and nothing else can reach it, dropping a
+    table does take its pictures with it. If the API key is missing, the app says so on entry: the
+    database still works, but image features will not.
+  </p>
+</section>
+
+<section id="import-export">
+  <h2>7. Import &amp; Export</h2>
+  <p>
+    Export is a short wizard — the sheet tells you which step you are on, and
+    <strong>Back</strong> returns to the previous one rather than cancelling
+    everything.
+  </p>
+  <h3>Step 1 — Format</h3>
+  <table>
+    <tr><th>Format</th><th>What you get</th></tr>
+    <tr><td>ZIP archive</td><td>The SQLite file plus a folder of every attached image.</td></tr>
+    <tr><td>Folder (all files)</td><td>The same content as loose files rather than one archive: <code>.db</code>, images, <code>.sql</code> and <code>.php</code>.</td></tr>
+    <tr><td>SQLite database</td><td>Just the raw <code>.db</code> file.</td></tr>
+    <tr><td>MySQL dump</td><td>A <code>.sql</code> script that recreates the data on a MySQL server.</td></tr>
+    <tr><td>PHP viewer</td><td>A ready-to-host PHP web page — see section 9.</td></tr>
+    <tr><td>CSV table</td><td>One CSV file per table; opens in any spreadsheet app.</td></tr>
+  </table>
+  <h3>Step 2 — Destination</h3>
+  <table>
+    <tr><th>Destination</th><th>Where it goes</th></tr>
+    <tr><td>Copy to MySQL server</td><td>A database on the phone only, and first on
+        the list. Not a file: the database is made a MySQL database on a
+        server one of your saved logins reaches, its pictures go with it, and
+        a connection to it is added to the database list. It asks which
+        server, then fills in the connection form for you to check. The
+        connection is given the phone database's own name.</td></tr>
+    <tr><td>Save to Device</td><td>The phone's own Save dialog: you choose the
+        folder and the name there. It reaches anywhere the phone can see —
+        internal storage, an SD card, Drive, another app's folder — and needs no
+        permission at all.</td></tr>
+    <tr><td>Share</td><td>Handed to any other app — email, chat, cloud drive.</td></tr>
+    <tr><td>Upload to server</td><td>Uploaded to your server as a single file,
+        into its Remote Directory.</td></tr>
+    <tr><td>Publish as web page</td><td>The whole set — database, images and the generated PHP viewer — into a folder on your own web server in one step.</td></tr>
+  </table>
+  <h3>Step 3 — Name</h3>
+  <p>
+    The file name is checked before anything is written. Characters that cause
+    trouble on Android, on Windows or in a remote path are replaced with
+    <code>_</code>; database exports are stricter still, because the name also
+    ends up in the PHP viewer's URL. A name that is already taken is the system
+    dialog's business — it numbers the new one — so the app no longer asks you
+    about overwriting anything.
+  </p>
+  <div class="note">
+    There is no size limit on an export. Everything is written and read a buffer
+    at a time rather than held in memory, so a database with a few hundred
+    megabytes of photographs saves exactly like a small one.
+  </div>
+  <h3>Import from...</h3>
+  <ul>
+    <li>A ZIP previously created by the app (database + images).</li>
+    <li>A plain <code>.db</code> SQLite file.</li>
+    <li>A CSV file — a new table is created from its header row. You are asked
+        which delimiter the file uses, so semicolon-separated exports from
+        European spreadsheets import correctly.</li>
+  </ul>
+  <div class="note">
+    <strong>A name already on the phone is asked about.</strong> Import a
+    <code>MyDb</code> while you already have one and you are offered
+    <strong>Replace</strong> or <strong>Keep both</strong> — kept, the incoming
+    one lands as <code>MyDb_1</code> and yours is untouched. Nothing is ever
+    merged into an existing database: the two sets of images would end up in
+    one folder, beside a database that knows nothing about half of them.
+  </div>
+  <div class="note">
+    MySQL connections can be exported too, but have no "Publish as web page"
+    option — a database that already lives on a server has no reason to be
+    uploaded back to itself.
+  </div>
+</section>
+
+<section id="backup">
+  <h2>8. Backup &amp; Restore</h2>
+  <p>
+    An export copies one database. A <strong>backup</strong> copies them all, in
+    one action, into a single file — which is the one worth having before a new
+    phone, a reinstall, or anything that makes you hesitate. Both rows are in
+    <strong>Setup</strong>.
+  </p>
+  <h3>Back up everything</h3>
+  <p>One zip, holding four things:</p>
+  <ul>
+    <li><strong>Every local database</strong> — the <code>.db</code> file, its
+        write-ahead log, and the images beside it, folder for folder.</li>
+    <li><strong>That database's settings</strong> — which columns the record
+        list shows (and whether the card's two corners are drawn), which column
+        each table is sorted by, how the record list is drawn, and any barcode
+        pinned under a column.</li>
+    <li><strong>Your saved logins</strong>, as <code>connections.json</code>:
+        MySQL connections, the named SFTP/FTP servers, the SSH terminal
+        connections, and one API key per AI provider.</li>
+    <li><strong>Your saved pages and your list order</strong> — the Web View's
+        bookmarks, and the order you dragged the database list and each
+        database's tables into.</li>
+    <li><strong>Your terminal hints</strong>, when you have edited them.</li>
+  </ul>
+  <ul>
+    <li>It goes wherever an export can — Save to Device, Share, or an upload to
+        a saved server.</li>
+    <li><strong>The name it suggests puts the date first</strong> —
+        <code>2026-09-12_MDbackup.zip</code>. A file list cuts off the end of a
+        name, and the end is where the date used to be, so every backup on the
+        phone read as the same word. Turned round it survives being cut, and
+        sorting by name is sorting by date.</li>
+    <li><strong>It never asks for a password.</strong> A locked database is
+        copied as the encrypted file it is, and comes back needing the same
+        password it needed before.</li>
+    <li>There is no size limit. The file is written a buffer at a time rather
+        than assembled in memory, so a phone full of photographs backs up like
+        any other.</li>
+  </ul>
+  <div class="note">
+    <strong>The zip itself is the secret.</strong> Your logins are written into
+    it <em>in the clear</em>, and that is deliberate: the stored form is
+    encrypted under a key that cannot leave this phone, so a copy of it would
+    open on no other device — written out plainly, it actually restores. Treat
+    the file the way you would treat a sheet of paper with your passwords on
+    it. Two things are deliberately left out: your <strong>database
+    passwords</strong>, because a backup that could open its own encrypted
+    files would not be worth much, and the Puter token, which is fetched again
+    from the API key that is in the zip.
+  </div>
+  <div class="note">
+    <strong>A backup password seals the logins.</strong> Setup →
+    <strong>Backup password</strong>. Once it is set, <strong>Back up
+    everything</strong> asks for it before anything else, and the logins and
+    the terminal hints go into the zip encrypted with it (AES-256) — unzipped,
+    they are unreadable. The databases and pictures stay ordinary files. A
+    restore asks for the same password; press Cancel there and everything
+    comes back except the logins. Somebody you lend the phone to therefore
+    cannot send themselves your passwords through a backup. Forget the
+    password, and the logins in that backup are lost — the rest is not.
+  </div>
+  <h3>Restore from a backup</h3>
+  <ul>
+    <li>It first asks <strong>where the backup is</strong>: this phone, or a
+        server — in which case it browses a saved server and fetches the zip
+        for you. Everything after that is the same either way.</li>
+    <li><strong>Then it asks which of two restores</strong> — every time,
+        before anything is written.</li>
+  </ul>
+  <h3>Add to this phone</h3>
+  <ul>
+    <li><strong>Nothing here is removed.</strong> A database whose name is also
+        in the backup is kept beside the one here, as <code>name_1</code>, with
+        its settings and its place in the list following it.</li>
+    <li><strong>Logins and saved pages merge.</strong> A login is matched by
+        name and a page by its address, so a page you renamed on one phone is
+        still the same page. Anything already here is updated, anything new is
+        added, anything the backup does not mention is left alone — and a
+        restored page keeps its place rather than jumping to the end.</li>
+    <li>The order on your screen wins; anything the backup knows about that you
+        do not is appended.</li>
+  </ul>
+  <h3>Replace everything</h3>
+  <p>
+    <strong>This phone becomes the backup.</strong> Use it to make a second
+    phone match the first — which is what it is for, and what merging could
+    never do: restoring a four-server backup onto a phone that had its own
+    servers used to leave you with seven.
+  </p>
+  <ul>
+    <li>Every local database here is deleted and the backup's put in their
+        place. The logins, servers, saved pages, list order and pairings are
+        written over what is here rather than merged into it.</li>
+    <li><strong>Anything not in the backup is gone for good</strong> —
+        databases included. The confirmation tells you how many databases are
+        here and how many are in the backup before you choose.</li>
+    <li>A section the backup does not carry at all is still left alone. An
+        older zip simply has no such part, and "match the backup" cannot
+        sensibly mean "delete the things this backup was written before".</li>
+  </ul>
+  <div class="note">
+    Neither choice ever merges <em>into</em> a database that is already here.
+    Your rows are never mixed with a backup's.
+  </div>
+</section>
+
+<section id="publish">
+  <h2>9. Publish to Web (PHP Viewer)</h2>
+  <p>
+    One of the app's signature features: turning any database into a real
+    website with a single tap, no web-development knowledge needed.
+  </p>
+  <ul>
+    <li><strong>Publish as web page</strong> (or the "PHP viewer" export) creates
+        two ready-made PHP pages named after the database, sitting next to the
+        <code>.db</code> file on your web server: <code>MyDb.php</code> and
+        <code>MyDbai.php</code>.</li>
+    <li><code>MyDb.php</code> is the plain reader — the whole database as cards
+        with photos, a search box, and Print / Save as PDF. It holds no API
+        keys, so it is the one to share.</li>
+    <li><code>MyDbai.php</code> is the same page plus the AI search and the SQL
+        box. It is the only one that uses AI keys, and it ships with them
+        empty. To use OpenRouter, Mistral or Claude, open <code>MyDbai.php</code>
+        on your server and paste your key between the quotes at the top:
+        <pre>$openrouterApiKey = 'sk-or-v1-...';
+$mistralApiKey    = '...';
+$claudeApiKey     = 'sk-ant-api03-...';</pre>
+        Publishing the page again from the app writes the empty copy back, so
+        paste the key again after that. Ollama needs no key. Without a key the AI box simply says none is set. The SQL box on this
+        page runs one read-only statement at a time and nothing else,
+        whatever it is dressed up as.</li>
+    <li><strong>Each table is listed in the order you chose with Sort by</strong>
+        in the app. The choice goes up beside the database as
+        <code>MyDb_sort.json</code>. With no choice, or a column that no longer
+        exists, the page shows the rows as they are stored.</li>
+    <li><strong>A page for a MySQL database keeps itself up to date.</strong>
+        When you change something on the server through the app — a record, a
+        table, a statement in SQL Query — the app sends the page a fresh copy
+        of the database a few seconds after you stop, and does the same after
+        you leave <strong>Sort by</strong>. It only does this where the page
+        already is: the connection's paired server, in its Image folder. Changes
+        made outside the app (phpMyAdmin, another phone) are not seen until the
+        next change made in the app.</li>
+    <li>The AI search box in <code>MyDbai.php</code> searches only that one
+        database — MyDbai.php learns MyDb, Animalsai.php learns Animals — and does
+        not answer general questions. A code or name is turned into SQL on
+        the page; longer questions go to a locally hosted Ollama model
+        (free) or a cloud API. The provider and <strong>your own</strong> API
+        key are configured by editing a few lines near the top of the generated
+        PHP file — the same rule as in the app: the key is yours, not the
+        app's.</li>
+    <li>A single switch inside that file, <code>$editing = 'on'</code> or
+        <code>'off'</code>, controls whether visitors are allowed to edit data
+        or only view it.</li>
+    <li><strong>A password-protected database still works.</strong> The page
+        opens its database with plain SQLite and no key, so the upload publishes
+        a decrypted copy — made through the database you already have open, so
+        nothing asks you for the password again. The copy on your phone stays
+        encrypted. Only <strong>Publish as web page</strong> does this; an export of
+        the database itself, and the ZIP you can import back, keep their
+        encryption.</li>
+    <li>The upload also puts an <code>.htaccess</code> beside the page, so a
+        browser cannot download the <code>.db</code> or the <code>.sql</code>
+        directly. The page is meant to be read over the web; the data behind it
+        is not.</li>
+  </ul>
+  <div class="note">
+    Because it is a plain PHP file, the published page can be opened, inspected
+    and customised in this app's own Code Editor — and actually run through the
+    PHP Preview — before it is ever uploaded.
+  </div>
+</section>
+
+<section id="sftp">
+  <h2>10. Servers — SFTP &amp; FTP</h2>
+  <p>
+    A list of named servers, not one slot.
+    <strong>Setup → Servers</strong> opens that list. Add as many as
+    you have hosts — a home Mac Mini, a VPS, a shared-hosting account — each
+    with its own name, address and folders.
+  </p>
+  <p>
+    <strong>A server speaks SFTP or plain FTP, and you say which.</strong> Most
+    shared web hosting offers FTP on port 21 and no SSH at all, so a host like
+    that can be set up and used exactly like an SFTP one. One thing genuinely
+    differs: over FTP a file counts as changed by its <em>size</em> alone,
+    because there is no dependable way to stamp a date onto what was just
+    uploaded. Over SFTP the app sets the date itself and compares both.
+  </p>
+  <h3>One server, both protocols</h3>
+  <p>
+    A machine you can reach two ways is <strong>one entry, not two</strong>.
+    The Protocol switch chooses which way is in use, and
+    <strong>everything except the name is remembered separately for each</strong>
+    — address, username, password, port, and both folders. Flip the switch and
+    the other set comes back exactly as you left it.
+  </p>
+  <p>That matters because the two are rarely alike:</p>
+  <ul>
+    <li>Hostinger answers FTP on 21 and SFTP on 65002 under
+        <em>different passwords</em>, and its folders are absolute over the one
+        and relative over the other, because SSH lands in your account home.</li>
+    <li>A Mac Mini is <code>192.168.1.115</code> over FTP on your own network
+        and a DuckDNS name over SFTP from outside it — the same machine at two
+        addresses.</li>
+  </ul>
+  <p>
+    Filling in a protocol you have not used yet starts from the address and
+    account already on screen, since most servers answer both in one place;
+    usually only the port and the password need changing.
+  </p>
+  <div class="note">
+    <strong>The switch is a setting, not a question during an export.</strong>
+    An upload uses whichever protocol the server is set to right now; to send
+    over the other one, come back here and flip it. There is deliberately no
+    automatic fallback — quietly dropping from SFTP to plaintext FTP is not a
+    decision the app should make for you.
+  </div>
+  <table>
+    <tr><th>Field</th><th>Example</th><th>What it is</th></tr>
+    <tr><td>Name</td><td><code>Strato</code></td><td>How the server is listed. The name you pick from — two servers may not share one. Lists show the name and SFTP / FTP only; the address is seen only here, in the server's own form.</td></tr>
+    <tr><td>Protocol</td><td><code>SFTP</code></td><td>SFTP or FTP — which one this server is using. Both are saved; see above.</td></tr>
+    <tr><td>Server IP/Host</td><td><code>192.168.1.115</code><br><code>server.duckdns.org</code></td><td>The bare address, no <code>http://</code>.</td></tr>
+    <tr><td>Port</td><td><code>22</code> / <code>21</code></td><td>22 for SFTP, 21 for FTP. Checked as you type.</td></tr>
+    <tr><td>Username / Password</td><td><code>root</code></td><td>The server account.</td></tr>
+    <tr><td>Remote Directory</td><td><code>/var/www/html/maps/</code></td><td>Where a plain upload lands.</td></tr>
+    <tr><td>Upload folder</td><td><code>/var/www/html/my_database_images/</code></td><td>Where "Publish as web page" publishes. Must be writable by your account.</td></tr>
+  </table>
+  <h3>Test connection</h3>
+  <p>
+    On the same form, and worth using before your first upload. It dials, logs
+    in and looks at both folders — using the fields <em>as they stand</em>, not
+    as they were last saved.
+  </p>
+  <ul>
+    <li>It always gives you an answer. A folder that does not exist yet is
+        <em>reported</em>, not treated as a failure, because an upload creates
+        what it needs.</li>
+    <li>That report is the point. A mistyped <code>/https/maps/</code> is created
+        just as happily as <code>/htdocs/maps/</code> — and afterwards nothing
+        tells you your files went somewhere nobody will ever look.</li>
+    <li>If it cannot connect, the message names the host and the port
+        <em>the app dialled</em>. The raw network error names a local port
+        instead, a number you never typed, which is no help at all.</li>
+  </ul>
+  <h3>Which server an upload goes to</h3>
+  <p>
+    A local database and a MySQL connection can each be <strong>paired</strong>
+    with a server. A connection's pairing you choose, on <strong>SFTP
+    server</strong> in its form. A local database's you do not: it is written
+    down the first time an upload has to ask you which server to use, and the
+    only place it can be seen afterwards is the <strong>Used by</strong> line
+    under each server in Setup → Servers. Either way, which server an upload
+    actually uses is asked <em>during the export</em>, right after you choose
+    the destination — so the folder shown in the later steps is the folder your
+    file really lands in.
+  </p>
+  <ul>
+    <li>The paired server is ticked, not forced, and picking a different one
+        this time does not change the pairing.</li>
+    <li>The question is skipped when there is nothing to choose: one saved
+        server is not a menu, and none opens the setup form.</li>
+    <li>When the upload finishes, the app tells you the full path the file
+        landed at and names any folder it had to create to get there.</li>
+  </ul>
+  <p>
+    A folder upload is a <strong>sync</strong>, not a blind re-upload: the app
+    scans what is already on the server, sends what changed, skips what did not,
+    and removes files that no longer exist locally. When it finishes it reports
+    how many files were uploaded, skipped, deleted and — if any — failed, so a
+    partial upload is never mistaken for a complete one.
+  </p>
+  <div class="note">
+    A folder path is always treated as a folder. If you type it without the
+    trailing slash the app adds one, so an upload cannot end up writing a file
+    alongside the folder instead of into it.
+  </div>
+
+  <h3>Files on a server — <span class="tag">Setup</span></h3>
+  <p>
+    Shows what is actually <em>on</em> a server, and is how you put anything
+    from your phone there — a photo, a PDF, a whole folder. Nothing else here does: every
+    other feature writes into folders it was told about and never reads one
+    back, so a file that landed in the wrong place stayed invisible until a page
+    failed to change.
+  </p>
+  <ul>
+    <li>List folders, upload, download, rename, delete a file, delete an empty
+        folder, make a folder. Deleting a folder is not recursive, and a server
+        that refuses tells you so.</li>
+    <li><strong>Upload</strong> asks one thing — <em>Files</em> (one or
+        several) or <em>A folder</em> (everything in it, subfolders and all) —
+        and puts it in the folder you are looking at. A folder lands in one of
+        its own name: sending <code>Camera</code> while you are in
+        <code>/htdocs/</code> puts it in <code>/htdocs/Camera/</code>. It all
+        goes on the connection the screen already has, each file fetched only
+        when its turn comes, and a file the phone will not hand over is passed
+        over and counted rather than losing the rest.</li>
+    <li><strong>You can also start from another app.</strong> Share a file to
+        My Database Pro from the Gallery or Files and the app asks which server
+        and which folder, with that file in hand.</li>
+    <li><strong>Rename</strong> is the one thing here that changes a server
+        without destroying or sending anything — a file uploaded under the
+        wrong name used to mean downloading it, deleting it and sending it back
+        up. It works on a folder too. A name already in the listing is refused,
+        and so is a name with a slash in it: that is a move, not a rename.</li>
+    <li>Uploading over a name that is already there <strong>asks first</strong>.
+        Neither protocol asks — both overwrite in silence.</li>
+    <li><strong>Hold a row to see where the file really is</strong>, and it is
+        copied at the same time — <strong>Copy path</strong> is on the row menu
+        too. This screen is the only thing that knows: a row carries a name,
+        and the path is that name under whichever folder you have walked into.
+        Use it before typing a path into the Terminal, or before asking the AI
+        about a file. Folders have a path too, ending in a slash — and the path
+        is shown on screen whether or not the clipboard accepted it.</li>
+    <li><strong>Look at a picture without leaving the app</strong> — View image
+        on the row menu. A text file can be <strong>opened in the editor</strong>
+        and saved straight back to the server.</li>
+    <li><strong>Double-tap a file</strong> and it does whichever of those two
+        fits: a picture opens in the viewer, a text file in the editor. Both
+        stay on the menu as well, since nothing on a row tells you it can be
+        tapped twice. Download stays on the menu only — it asks where to put the
+        file, and a gesture should not start a conversation.</li>
+    <li><strong>Back goes up one folder</strong>, not off the screen. Only when
+        there is nowhere left to go back to does it close the browser.</li>
+    <li>It opens on the server's Remote Directory rather than the root — on
+        shared hosting the root is full of folders you did not make and cannot
+        write to.</li>
+    <li><strong>The browser is also a picker.</strong> It is how you choose the
+        folder an upload goes to, and how you find a backup on a server to
+        restore from. In those modes the folders still open, but everything that
+        changes the server — upload, delete, new folder — comes off: a picker
+        is not a place to delete things.</li>
+  </ul>
+</section>
+
+<section id="code-editor">
+  <h2>11. Code Editor &amp; PHP Interpreter</h2>
+  <p>
+    A multi-tab code editor with syntax highlighting. Open and save files on the
+    phone, undo/redo, and find and replace within a file.
+  </p>
+  <ul>
+    <li><strong>HTML files</strong> get a live Preview.</li>
+    <li><strong>PHP files</strong> get a <em>real</em> Preview: the app ships an
+        actual PHP 8.5 interpreter, with the <code>mysqli</code> and
+        <code>pdo_mysql</code> extensions built in, and runs the file on a small
+        local server on the phone. PHP scripts that connect to a remote MySQL
+        server can be written and tested without leaving the app. (Android
+        only.)</li>
+    <li>Leaving the editor asks nothing and loses nothing: every tab, unsaved
+        text included, is kept and is there again next time. Closing a tab
+        with unsaved changes asks first. Tabs with unsaved changes are
+        marked.</li>
+    <li>Files that are not text are refused rather than opened, since opening
+        one here would corrupt it — and the next Save would write the damage
+        back over your original.</li>
+    <li>A tab remembers where you had scrolled to; a newly opened one starts at
+        the top.</li>
+  </ul>
+  <h3>Working on files that live on a server</h3>
+  <p>
+    A <code>.php</code> on a web host is a file to <em>edit</em>, not one to
+    download, change, and upload again by hand.
+  </p>
+  <ul>
+    <li><strong>Open from server</strong> in the editor's menu — or
+        <strong>Open in editor</strong> while browsing a server — opens the file
+        straight off the host.</li>
+    <li><strong>Save</strong> writes it back to where it came from. The tab
+        remembers which server, but never the password, so a server you deleted
+        in the meantime gives you a message rather than a crash.</li>
+    <li>Opening the same file twice takes you back to the tab already holding
+        it, instead of making a second copy that could overwrite your work.</li>
+    <li><strong>Upload to server</strong> is a third answer to "where does this
+        go", beside Save and Save as. It writes a <em>copy</em> somewhere the
+        tab has no relationship with: your tab keeps its own file and stays
+        unsaved if it was. A file that quietly started saving somewhere else
+        would be the worst kind of surprise.</li>
+  </ul>
+  <h3>Editor settings</h3>
+  <p>The editor has its own settings, separate from the app's:</p>
+  <ul>
+    <li><strong>Text</strong> — font size, line height, tab size, word wrap, line numbers.</li>
+    <li><strong>Appearance</strong> — the syntax colour theme.</li>
+    <li><strong>Reminder</strong> — whether a date and weekday separator is inserted into <code>reminder.txt</code> at startup.</li>
+    <li><strong>Auto-opened files</strong> — which bundled files open as tabs when the editor starts.</li>
+  </ul>
+  <h3>The reminder note</h3>
+  <p>
+    Every time the editor opens, a tab called <code>reminder.txt</code> is ready
+    and waiting — a persistent scratchpad that autosaves to the phone as you
+    type, so it is always there for quick notes.
+  </p>
+</section>
+
+<section id="webview">
+  <h2>12. Web View</h2>
+  <p>
+    Opens any web address inside the app — a phpMyAdmin panel, a local web app,
+    the PHP viewer page from section 9, or any page you built in the editor.
+  </p>
+  <ul>
+    <li>Pages can be saved with a friendly name. A long press on the Web View
+        button on the tool row opens that list from any screen.</li>
+    <li>The globe in the top bar opens a small window of your saved pages beside
+        it, with the page still visible behind. <strong>Hold a row and drag</strong>
+        to reorder the list — so the page you read every day does not have to
+        stay at the bottom just because you added it last.</li>
+    <li>The Web View button returns you to the page you were last reading, at
+        the place you were in it — not to the bookmark that started it. That
+        survives the app being closed, or Android reclaiming it in the
+        background.</li>
+    <li>Back first walks through that page's own history, then returns to where
+        you came from.</li>
+    <li>Each saved page remembers its own text size (30%–300%, 100% is normal),
+        so a page with tiny text can be made comfortable to read.</li>
+    <li>A "Block ads" switch blocks requests to the big ad and tracker networks,
+        <strong>on by default</strong>, and <strong>in this view only</strong> —
+        it changes nothing outside the app's own browser. It is a hand-picked
+        list, not a subscribed filter list, so it removes most ads but not all;
+        an ad a site serves from its own address cannot be caught by a list of
+        ad domains at all. Turn it off for a page that breaks with it on — a
+        login behind a blocked domain, say.</li>
+    <li>Blocking also has to <strong>close the hole the ad leaves</strong>. A
+        site reserves the banner's height in advance and only gives it back once
+        the ad reports itself drawn — which, blocked, never happens, so the page
+        keeps a column of white gaps with spinners turning in them. The app
+        hides those empty slots itself, before the page is drawn.</li>
+    <li>A brand-new install already comes with a page saved for you: the
+        <a href="https://www.sqlitetutorial.net/" target="_blank">SQLite
+        Tutorial</a> website, a free reference for learning SQL — a handy
+        companion to SQL Query.</li>
+  </ul>
+</section>
+
+<section id="ssh">
+  <h2>13. SSH Terminal</h2>
+  <p>
+    A full terminal (built on <code>xterm</code>) to any server you manage over
+    SSH. Connections are saved by name, host, port, username and password.
+  </p>
+  <p>
+    The Terminal button on the tool row reconnects straight to the connection
+    you last used, rather than making you pick it out of the list again; Back
+    still reaches the list underneath. An SSH session cannot truly be resumed —
+    leaving the screen drops the connection — so this reconnects rather than
+    restores.
+  </p>
+  <p>
+    <strong>The server's host key is remembered the first time you reach
+    it</strong>, and every connection after that has to present the same one —
+    the same thing an <code>ssh</code> client does with a host it has never
+    met. It is what makes the password you type go to the machine you meant.
+    If a server is genuinely rebuilt its key really does change, and the app
+    will refuse it; deleting the saved connection or server forgets the old
+    key along with everything else kept under its name, and the next
+    connection writes down the new one. The same check covers Files on a
+    server and every upload.
+  </p>
+  <p>An extra key bar above the keyboard adds the keys a phone keyboard is missing:</p>
+  <p>
+    <span class="kbd">CTRL</span> <span class="kbd">ALT</span>
+    <span class="kbd">TAB</span> <span class="kbd">ESC</span>
+    <span class="kbd">⌫</span> <span class="kbd">/</span>
+    <span class="kbd">-</span> <span class="kbd">Home</span>
+    <span class="kbd">End</span> <span class="kbd">PgUp</span>
+    <span class="kbd">PgDn</span> <span class="kbd">Copy</span>
+    <span class="kbd">Paste</span> <span class="kbd">↑↓←→</span>
+    <span class="kbd">OK / Enter</span>
+  </p>
+  <p>Output text can be selected with on-screen handles for copying, just like in a desktop terminal.</p>
+
+  <h3>Hints</h3>
+  <p>
+    The light bulb in the title bar opens your <strong>hints</strong>: commands
+    you use often, one tap from the prompt. They open as a panel under the key
+    bar, the way the keyboard does, so the terminal shrinks above it and the
+    prompt stays in sight. A tap <strong>pastes</strong> the command into the
+    prompt and never runs it — press <span class="kbd">OK</span> to send it.
+    The panel stays open for the next one; close it with ✕ or the bulb.
+  </p>
+  <p>
+    The hints are one text file, edited whole with the pencil in the panel.
+    A line starting with <code>###</code> names a hint, and the lines under it
+    are its command:
+  </p>
+  <pre><code>###Create database Animals
+mysql -u root -e "CREATE DATABASE Animals;"
+
+###Import a .sql file from the phone into Animals
+mysql -u root Animals &lt; {file}</code></pre>
+  <p>
+    Save keeps your copy; <strong>Reset to default</strong> in the menu goes
+    back to the hints the app ships with.
+  </p>
+  <p>
+    <code>{file}</code> in a command asks for a file. Tapping the hint asks
+    where it is — <strong>this phone</strong> or <strong>a server</strong>,
+    the same two answers a restore asks for — sends it to your home folder on
+    the server over the connection you are already on, and pastes the command
+    with <code>{file}</code> replaced by where it landed — for example
+    <code>mysql -u root Animals &lt; ~/Animals.sql</code> — waiting for
+    <span class="kbd">OK</span>. A file of the same name already there is
+    replaced.
+  </p>
+  <div class="note">
+    <strong>Or the app can write one for you.</strong> The third answer is
+    <strong>Make one now</strong>: pick one of the databases on the phone and
+    the app writes a fresh <code>.sql</code> of it, sends it up and fills the
+    command in — no export, no Save to device, no hunting through Downloads.
+    It is also the only one of the three that is guaranteed current; a dump
+    sitting on a server is whatever the last export left there. Local
+    databases only: dumping a server's database to feed it back into a shell
+    on that same server is not a thing anybody wants.
+  </div>
+  <div class="note">
+    <strong>And it does not ask which database when your command says.</strong>
+    A hint reading <code>mysql -u root MyDb &lt; {file}</code> is a hint about
+    MyDb, so <strong>Make one now</strong> writes <code>MyDb.sql</code> and
+    pastes it — no list to pick from, and no way to send the wrong database to
+    a command naming another. It only does this when your command names
+    <em>exactly one</em> of your databases: naming two, or naming one by
+    accident (a database called <code>root</code>, in
+    <code>mysql -u root MyDb</code>), brings the list back, because then the app
+    has no right answer.
+  </div>
+  <div class="note">
+    <strong>A server is offered because that is often where the file is.</strong>
+    A <code>.sql</code> written by an export is as likely to be sitting on a
+    web host as on the phone, and fetching it with something else just to pick
+    it out of Downloads was the way round that. A file taken off a server is
+    still <em>sent up</em> to the home folder rather than named where it lies:
+    there is no telling from the terminal whether that server is this machine
+    — a host answers to several names, and through two different logins — so
+    the app never guesses.
+  </div>
+  <div class="note">
+    Several lines pasted at once all go to the shell, not into a program the
+    first line starts: <code>mysql -u root</code> followed by a
+    <code>CREATE</code> line does not run the <code>CREATE</code> inside MySQL.
+    Give MySQL the statement on the same line with
+    <code>-e "…"</code>.
+  </div>
+</section>
+
+<section id="ai">
+  <h2>14. AI Chat Assistant</h2>
+  <p>
+    A built-in assistant that can hold a normal conversation and — when you
+    ask for data — write ready-to-run SQL for you. The same database ▸ table
+    bar SQL Query uses sits above the chat, so a search is aimed at that
+    pick rather than at every database on the phone. A database with two or
+    more tables offers <strong>All tables</strong> as the first row of the
+    table menu: pick it and a search looks through every table of that
+    database, without you naming them. It answers in whatever language you
+    write in.
+  </p>
+  <h3>Provider &amp; model</h3>
+  <div class="note">
+    <strong>The API key is yours, and you have to go and get it.</strong> The
+    app ships with none and cannot give you one — it is not a service you are
+    buying here. Open an account with the provider you want, create a key on
+    <em>their</em> site, and paste it into <strong>API key</strong> under the
+    gear in the AI chat screen. Whatever the model then costs is billed by that
+    provider to that account. Until a key is in, the row says
+    <strong>Not set</strong> and that provider's models will answer nothing.
+  </div>
+  <ul>
+    <li>Chosen from the gear icon in the AI chat screen. The key you enter is
+        stored encrypted on your own device, per provider, and never leaves
+        it — it is sent to that provider and to nobody else.</li>
+    <li>Each choice is saved <em>as you pick it</em>, not on a Save button — so
+        a key you typed and then backed out of is not quietly lost.</li>
+    <li>The providers shipped with the app are <strong>Claude</strong>
+        (console.anthropic.com), <strong>OpenAI</strong>
+        (platform.openai.com), <strong>Gemini</strong> (Google AI Studio),
+        <strong>Grok</strong> (x.ai), <strong>Mistral</strong>
+        (console.mistral.ai), <strong>DeepSeek</strong> and
+        <strong>Puter</strong> — each of them somebody you sign up with
+        yourself. Puter is the one that takes either an API key or
+        <code>user:password</code> of your account.</li>
+    <li><strong>My server has to be your own server.</strong> It is an Ollama
+        (or anything else that speaks the OpenAI API) running on a machine you
+        control — a Mac Mini, a PC, a server at home. It needs no key and
+        nothing leaves your own network, which is what makes it the cheapest
+        and the most private of them, and it is also the one that will not work
+        until you set it up.</li>
+  </ul>
+  <div class="note">
+    <strong>What ships in that row is an example, not an address that will
+    work for you.</strong> It points at a machine on the author's own network
+    (<code>http://10.139.243.1:11434/v1</code>, model
+    <code>qwen2.5-coder:7b</code>), which means nothing from your phone. To use
+    it: install Ollama on your machine, <code>ollama pull</code> a model, let
+    it listen on the network rather than only on localhost, then open the gear
+    → <strong>Edit providers (JSON)</strong> and put your own address and model
+    name in. A model bigger than that machine's memory is read off the disk a
+    token at a time, so pick one that fits — 7B is comfortable on 8 GB.
+  </div>
+  <ul>
+    <li>Models can be added or removed from the same screen, the whole provider
+        list can be edited as JSON, and both can be reset to the shipped
+        defaults. The shipped model names are examples too: providers retire
+        and rename them, so a name that worked last year may have to be
+        corrected here.</li>
+    <li>Once you have saved a list of your own it wins over the shipped one, so
+        a later app update will not overwrite your addresses or your keys.</li>
+  </ul>
+  <h3>Rules</h3>
+  <p>
+    The instructions the assistant follows can be viewed and edited from the
+    rules icon next to the gear, and imported from a file, pasted from the
+    clipboard, copied out, exported, or reset to the shipped defaults.
+  </p>
+  <p>
+    A search no longer sends that whole file. It goes with a short SQL core and
+    only the tables the question needs — or every table of the picked database,
+    when All tables is selected — which is why a data question is as quick as
+    a general one. A how-to about the app still gets this guide. Notes you add
+    under Additional Notes go with every prompt.
+  </p>
+  <h3>Voice</h3>
+  <ul>
+    <li>The microphone button dictates a message.</li>
+    <li>Recognition uses the phone's own speech engine. The language list is
+        asked of the recogniser directly, so it covers the languages it handles
+        over the network too, not only the ones installed for offline use.</li>
+    <li>Input language, auto-send after speaking, and reading replies aloud are
+        all configurable.</li>
+  </ul>
+  <h3>Running SQL</h3>
+  <ul>
+    <li>Every SQL block the assistant writes gets a <strong>Run</strong> button
+        right there in the chat, working on local SQLite databases and on any
+        saved MySQL connection. <code>SELECT</code> results appear as a table
+        (first 100 rows); other statements report how many rows were affected.</li>
+    <li>What the block shows is a simplified, textbook-style version of the query
+        using <code>LIKE</code>, because that is easier to read and learn from.
+        The database runs a more precise whole-word <code>REGEXP</code> form —
+        <code>LIKE '%045%'</code> also matches <code>0450</code>, whereas the
+        REGEXP form matches only the whole word. The exact query is always one
+        tap away under the block.</li>
+  </ul>
+  <h3>Other</h3>
+  <ul>
+    <li>The pencil icon on an earlier message re-edits it; everything sent after
+        that point is replaced when the edited message is resent.</li>
+    <li>You can ask the assistant about the app itself — "how do I export a
+        database", "how do I publish to the web" — and it answers from the same
+        guide you are reading now.</li>
+  </ul>
+</section>
+
+<section id="settings">
+  <h2>15. Setup (Settings)</h2>
+  <p>
+    Opened from the title bar of the database list. The rows are grouped, and
+    nothing is changed in place — every row opens a picker, even the ones that
+    are a single on/off, so the first level stays a readable list of names
+    rather than a column of controls.
+  </p>
+  <h3>Preferences</h3>
+  <ul>
+    <li><strong>App Language</strong> — follow the phone, or pick one of the 50
+        translations directly.</li>
+    <li><strong>App appearance</strong> — light or dark theme, applied
+        instantly.</li>
+  </ul>
+  <div class="note">
+    <strong>Thumbnails</strong> and the rest of <strong>Display</strong> were
+    here once, for every database at once. They are on the table list's
+    three-dot menu now — see <strong>Display</strong> in section 2 — so turning the
+    pictures off for one database leaves the others alone.
+  </div>
+  <h3>Pictures</h3>
+  <ul>
+    <li><strong>Choose Image Quality</strong> — <strong>Ask every
+        time</strong>, or always <strong>Original</strong>,
+        <strong>Medium</strong> or <strong>Low</strong>. Set to one of the
+        three, adding pictures to a record no longer asks.</li>
+  </ul>
+  <h3>Codes and text</h3>
+  <p>
+    Three things to do rather than to set, after the two groups that are settings. Hold a row and
+    drag it to put the one you use most on top; the order is kept.
+  </p>
+  <ul>
+    <li><strong>Scan a code</strong> — read a QR square or a barcode with the
+        camera or from a picture. What it read is shown, with
+        <strong>Copy</strong>.</li>
+    <li><strong>QR code</strong> — type any text (a link, a wifi password, an
+        address) and the code is drawn as you type. Save it to the phone,
+        share it, or send it to a server.</li>
+    <li><strong>Read text</strong> — the words off a photograph, shown with
+        <strong>Copy</strong>.</li>
+  </ul>
+  <h3>Connections</h3>
+  <ul>
+    <li><strong>Servers</strong> — the list of named servers from
+        section 10. Each row says how the server is reached and
+        <strong>what is paired with it</strong>. Hold a row and drag it, the
+        same as a database: that order is the order every picker offers the
+        servers in. The pairing line is worth reading before you delete a
+        server — deleting one drops every pairing pointing at it, without
+        asking.</li>
+    <li><strong>Files on a server</strong> — see what is actually on it, and
+        upload files or a whole folder into it, or remove them.</li>
+  </ul>
+  <h3>Backup</h3>
+  <ul>
+    <li><strong>Back up everything</strong> and <strong>Restore from a
+        backup</strong>. See section 8.</li>
+  </ul>
+  <h3>About</h3>
+  <ul>
+    <li><strong>How to</strong> — this page. It is part of the app rather than
+        a link to a website, so it opens with no connection at all.</li>
+    <li><strong>Privacy Policy</strong> — in the app for the same reason, and
+        it is short: nothing about you leaves this phone unless you send it
+        somewhere yourself.</li>
+    <li><strong>App Version</strong> with its build number — which is how you
+        tell one build from another.</li>
+  </ul>
+  <h3>Log</h3>
+  <ul>
+    <li>Every message the app has shown, kept so one that was on screen for a
+        second can still be read, and copied, afterwards. The last 100 are
+        kept.</li>
+  </ul>
+</section>
+
+<section id="security">
+  <h2>16. Security &amp; Your Data</h2>
+  <ul>
+    <li><strong>Database passwords.</strong> Setting a password on a database
+        encrypts the whole file, not just the screen in front of it. Without the
+        password the file is unreadable, in the app or out of it.</li>
+    <li><strong>Saved credentials.</strong> SFTP details, MySQL and SSH
+        connections and AI API keys are stored encrypted. On Android the key
+        lives in the hardware-backed Keystore; on Windows the platform's DPAPI is
+        used. The key never leaves the device.</li>
+    <li><strong>What that means for backups.</strong> Because the key cannot
+        leave the device, copying the encrypted values into a backup would only
+        carry over a blob nothing could read. So the backup writes those logins
+        out <em>in the clear</em> instead, which is what makes them actually
+        come back on a new phone — and what makes the backup file itself worth
+        protecting. See <a href="#backup">Backup &amp; Restore</a>.</li>
+    <li><strong>A saved login can be locked, and it is one password for all of
+        them.</strong> On a MySQL row it is <strong>Add Password</strong> under
+        Connection Options; on an SFTP-FTP server and on an SSH connection it is
+        in that entry's own form. The first lock sets the password — every one
+        after it asks nothing, because there is only ever one key. Take the last
+        lock off and the key is thrown away, so the next lock can ask you for a
+        new one.</li>
+    <li><strong>A lock stops the screen that shows the login, not the login.</strong>
+        That is the whole point: the phone can be handed to somebody with the
+        databases usable and the logins unreadable.
         <ul>
-            <li><strong>Launch the App:</strong> On first run, the app imports sample data from embedded ZIP assets into the documents directory. The Databases list screen then appears.</li>
-            <li><strong>Access Settings:</strong> Tap the gear icon (⚙️) in the top-right of the Databases screen.
-            Tap "Close" to save and exit. Settings persist across sessions.</li>
+          <li>An <strong>SFTP-FTP server</strong>: its form will not open, and
+              neither will Files on a server or the folder picker on it. An
+              export or an upload <em>to</em> it asks for its password first,
+              as soon as the server is chosen — Copy to MySQL server too. A
+              server with no password is not asked about.</li>
+          <li>A <strong>MySQL connection</strong>: Edit Connection, re-pairing
+              and Delete will not open. Opening the database, reading it and
+              exporting it all still work.</li>
+          <li>An <strong>SSH connection</strong>: the form, <em>the session
+              itself</em>, and Delete. Stricter on purpose — a shell on your
+              server is the thing itself, not a form about it.</li>
+          <li><strong>Delete asks for the key on all of them</strong>, and for a
+              local database it asks for that database's own password. A lock
+              that guards the sight of a login while the whole thing can be
+              thrown away is not much of a lock. Rename and duplicate stay open:
+              both leave the original where it is.</li>
         </ul>
-       
-        <h3>Managing Databases</h3>
-        <p>The Database list screen lists all databases. Tap a database to open its Tables screen (prompts for password if encrypted).</p>
-        <h4>Creating a Database</h4>
-        <ol>
-            <li>Tap the "+" button at the top.</li>
-            <li>Select "Create Database".</li>
-            <li>Enter a name (e.g., "MyNotes") in the dialog and tap "Create".</li>
-        </ol>
-        <h4>Importing a Database</h4>
-        <ol>
-            <li>Tap "+" and choose "Import ZIP (Database + Images)", "Import SQLite DB", or "Import from CSV".</li>
-            <li>Grant storage permissions if prompted.
-                <ul>
-                    <li><strong>ZIP Import:</strong> Select a .zip file; it extracts the .db and images to the app's documents directory, with a progress dialog.</li>
-                    <li><strong>SQLite Import:</strong> Select a .db/.sqlite/.sqlite3 file; copies it and adds 'image_paths' if missing.</li>
-                    <li><strong>CSV Import:</strong> Select a .csv file; creates a new database/table with columns from headers (sanitized names), imports rows in batches with a progress dialog.</li>
-                </ul>
-            </li>
-            <li>Imports process in a background isolate (showing % progress) and refresh the list.</li>
-        </ol>
-        <h4>Database Options (Long-Press a Database Name)</h4>
-        <ul>
-            <li><strong>Set as Default:</strong> Configures it (and its default table) to open automatically on app launch.</li>
-            <li><strong>Export:</strong> Choose "Save to Device" (select folder) or "Share" (via share_plus). Exports as ZIP (database + all referenced images, collected via batch queries), with a progress dialog in an isolate. For encrypted DBs, prompts for password.</li>
-            <li><strong>Rename:</strong> Edit the name in the text field and tap "Rename" (updates file and preferences).</li>
-            <li><strong>Add Password:</strong> Enter a new password to encrypt (uses sqlcipher_export in a temp DB).</li>
-            <li><strong>Remove Password:</strong> Enter the current password to decrypt (similar process).</li>
-            <li><strong>Delete:</strong> Confirm to permanently delete the .db file (and unreferenced images).</li>
-            <li><strong>Reorder:</strong> Use up/down arrows to move in the list (saves order).</li>
-            <li>Tap "Cancel" to exit options.</li>
-        </ul>
-       
-        <h3>Managing Tables (Inside a Database)</h3>
-        <p>From the Databases screen, tap a database to view its tables list (queried via sqlite_master, excluding system tables).</p>
-        <h4>Creating a Table</h4>
-        <ol>
-            <li>Tap the floating "+" button.</li>
-            <li>Enter a table name (e.g., "Entries", sanitized to letters/numbers/underscores) and optional columns (comma-separated, e.g., "title,description"). The 'image_paths' (TEXT) column is auto-added for image support.</li>
-            <li>Tap "Create".</li>
-        </ol>
-        <h4>Table Options (Long-Press a Table Name)</h4>
-        <ul>
-            <li><strong>Set as Default:</strong> Pairs with the default database for auto-open on launch.</li>
-            <li><strong>Rename:</strong> Edit the name (sanitized) and tap "Rename".</li>
-            <li><strong>Edit Columns:</strong> Opens a dialog to manage non-'image_paths' columns (via PRAGMA table_info).
-                <ul>
-                    <li><strong>Add:</strong> Tap "Add New Column", enter name (sanitized), tap "Add".</li>
-                    <li><strong>Move:</strong> Use up/down arrows to reorder (recreates table in temp, copies data).</li>
-                    <li><strong>Rename:</strong> Tap edit icon, enter new name, tap "Rename" (uses ALTER TABLE).</li>
-                    <li><strong>Delete:</strong> Tap delete icon (red), confirm (recreates table without column, copies data; can't delete PK or 'image_paths').</li>
-                </ul>
-            </li>
-            <li><strong>Delete:</strong> Confirm to drop the table and all data.</li>
-            <li>Tap a table name to open its Posts screen (loads all if toggled, else paginates).</li>
-        </ul>
-       
-        <h3>Managing Posts (Records in a Table)</h3>
-        <p>The Posts screen displays paginated entries (100 per load, infinite scroll via ScrollController). Each post is a card with fields (via PRAGMA) and thumbnails. Long-press a card to toggle edit/delete buttons. Tap a card to open the detailed view.</p>
-        <h4>Adding a Post</h4>
-        <ol>
-            <li>Tap the floating "+" button.</li>
-            <li>Fill text fields for each column.</li>
-            <li>If images are supported: Tap "+Gallery" or "+Camera" (grants permissions, rotates via EXIF, compresses via flutter_image_compress based on quality setting, creates thumbnail). Reorder/delete thumbnails in the dialog.</li>
-            <li>Tap "Add" to insert (JSON-encodes image_paths).</li>
-        </ol>
-        <h4>Editing a Post</h4>
-        <ol>
-            <li>Long-press card > "Edit" (or in detailed view).</li>
-            <li>Update fields/images.</li>
-            <li>Tap "Update" (uses rowid or PK for WHERE).</li>
-        </ol>
-        <h4>Deleting a Post</h4>
-        <ol>
-            <li>Long-press card > "Delete" (red) > Confirm.</li>
-        </ol>
-        <h4>Adding Images to a Post</h4>
-        <ul>
-            <li>In card or detailed view: Tap "+Gallery" or "+Camera" (appends to existing image_paths JSON).</li>
-        </ul>
-        <h4>Viewing Images</h4>
-        <ul>
-            <li>Tap a thumbnail for full-screen viewer (PageView with InteractiveViewer for zoom up to 32x, swipe navigation; disables scroll when zoomed). Tap to exit.</li>
-        </ul>
-        <h4>Detailed Post View (Single Post Screen)</h4>
-        <ul>
-            <li>Shows all fields and larger thumbnails. Long-press for edit/delete. Add images or edit/delete as above. Updates refresh the list.</li>
-        </ul>
-       
-        <h3>Searching and Filtering Posts</h3>
-        <h4>Simple Search</h4>
-        <ul>
-            <li>Enter keywords in the search bar (e.g., "apple pie").</li>
-            <li>Tap search icon or enter: Filters across text columns (LIKE %term% or FTS if table has fts_table). Results paginate.</li>
-            <li>Clear bar (X) to reset.</li>
-        </ul>
-        <h4>Showing All Posts</h4>
-        <ul>
-            <li>Tap "All" button to display everything (ignores search).</li>
-        </ul>
-        <h4>Advanced Search (Tune Icon)</h4>
-        <ul>
-            <li><strong>Sort:</strong> Choose column and ASC/DESC (applies ORDER BY).</li>
-            <li><strong>Filters:</strong> Per column, select operator (None, Contains, Equals, >, <, Between) and values (casts to REAL for numbers). Combines with AND (and with simple search if active).</li>
-            <li>Tap "Apply" to filter (resets pagination). "Reset" clears dialog.</li>
-        </ul>
-        <h4>Exporting Search Results</h4>
-        <ul>
-            <li>Tap download icon (↓) in app bar.</li>
-            <li>Select folder to save as CSV (all columns except image_paths, full results not just page).</li>
-        </ul>
-        <h4>Count Display</h4>
-        <ul>
-            <li>Shows "Found X entries" (or "Total" if no search) below bar (queried separately, with loading indicator).</li>
-        </ul>
-       
-        <h3>Additional Tips</h3>
-        <ul>
-            <li><strong>Pagination:</strong> Auto-loads on scroll end; efficient for large sets (e.g., 100k rows).</li>
-            <li><strong>Error Handling:</strong> Prompts for passwords on open/export; snackbars for errors (e.g., wrong password, invalid CSV). Ignores JSON parse errors in image_paths.</li>
-            <li><strong>Performance:</strong> Uses batches (1000 rows) for exports; isolates for ZIP/CSV processing. High quality increases sizes; thumbnails always JPEG.</li>
-            <li><strong>Back Navigation:</strong> Use phone's back button or home icon.</li>
-            <li><strong>Troubleshooting:</strong> If imports/exports fail, check permissions/file paths. Restart app if stuck. For encrypted DBs, always enter password when prompted.</li>
-        </ul>
-    </div>
-    
-    <div class="section">
-        <h2>SSH Terminal Usage</h2>
-        <p>The SSH Terminal allows you to connect to remote servers (e.g., Linux servers) for command-line access. It's useful for managing servers, running scripts, or troubleshooting.</p>
-        
-        <h3>Adding and Managing SSH Connections</h3>
-        <ol>
-            <li>Open the app and navigate to the "SSH Connections" menu (accessible from the main screen or database list).</li>
-            <li>Tap the "+" icon in the app bar to add a new connection.</li>
-            <li>Enter:
-                <ul>
-                    <li><strong>Connection Name:</strong> A friendly name (e.g., "My Server").</li>
-                    <li><strong>Host IP:</strong> The server's IP address or domain (e.g., "192.168.1.100" or "example.com").</li>
-                    <li><strong>Port:</strong> Default is 22 (standard SSH port).</li>
-                    <li><strong>Username:</strong> Your server username (e.g., "root" or "user").</li>
-                    <li><strong>Password:</strong> Your server password (stored securely in the app).</li>
-                </ul>
-            </li>
-            <li>Tap "Add" to save. If there's an error (e.g., duplicate name or invalid port), it will be shown.</li>
-            <li>Connections are listed and can be reordered by dragging (long-press and move).</li>
-            <li>To edit: Tap the "more" icon (three dots) next to a connection and select "Edit".</li>
-            <li>To delete: Select "Delete" from the same menu (confirmation required).</li>
-        </ol>
-        
-        <h3>Connecting to a Server</h3>
-        <ol>
-            <li>Tap a connection from the list to open the terminal.</li>
-            <li>The app will attempt to connect automatically using the provided credentials.</li>
-            <li>Once connected, you'll see a terminal interface (powered by xterm.dart).</li>
-            <li>Type commands as usual. Special keys:
-                <ul>
-                    <li>Use the on-screen buttons for CTRL, ALT, TAB, ESC, arrows, ENTER, etc.</li>
-                    <li>CTRL/ALT modifiers: Toggle them on/off; they apply to the next key press.</li>
-                </ul>
-            </li>
-            <li>The terminal supports resizing and basic input/output.</li>
-            <li>Connection status is shown (e.g., "Connecting..." or "Connected successfully").</li>
-            <li>To disconnect: Close the screen or let the session end naturally.</li>
-        </ol>
-        
-        <h3>Important Notes for SSH</h3>
-        <ul>
-            <li><strong>Battery Optimization:</strong> The app reminds you to disable battery optimization for the app (via a Snackbar). This keeps the connection alive in the background. Tap the message to open Android settings and disable it. Otherwise, Android may kill the app, disconnecting SSH.</li>
-            <li><strong>Security:</strong> Passwords are stored locally (via shared_preferences). Use strong passwords and avoid saving sensitive ones.</li>
-            <li><strong>Limitations:</strong> No key-based authentication (password-only). For production, ensure your server allows password logins securely.</li>
-            <li><strong>Troubleshooting:</strong> If connection fails, check host/port/username/password. Errors are displayed in the terminal (e.g., "Error: Connection refused").</li>
-        </ul>
-    </div>
-    
-    <div class="section">
-        <h2>MySQL Database Usage</h2>
-        <p>MySQL support lets you connect to remote MySQL databases, browse tables, query data, add/edit/delete posts, and handle images (uploaded to the server).</p>
-        
-        <h3>Adding and Managing MySQL Connections</h3>
-        <ol>
-            <li>From the main "Databases" screen, tap the "+" icon and select "Add MySQL Connection" (or similar UI element).</li>
-            <li>Enter:
-                <ul>
-                    <li><strong>Connection Name:</strong> A display name (e.g., "My Remote DB").</li>
-                    <li><strong>Host:</strong> Server hostname/IP (e.g., "mysql.example.com").</li>
-                    <li><strong>Port:</strong> Default 3306.</li>
-                    <li><strong>Username:</strong> MySQL user (e.g., "dbuser").</li>
-                    <li><strong>Password:</strong> MySQL password.</li>
-                    <li><strong>Database Name:</strong> The specific database to connect to (e.g., "mydatabase").</li>
-                    <li><strong>Use SSL:</strong> Toggle for secure connections (recommended).</li>
-                    <li><strong>CA Certificate, Client Certificate, Client Key:</strong> Optional PEM-encoded certs for SSL (paste or load from files).</li>
-                    <li><strong>Server API Key:</strong> Must match the key in my_database_api.php on your server (default '8888'—change it!).</li>
-                </ul>
-            </li>
-            <li>Tap "Add". Connections appear as ".mysql" entries in the database list.</li>
-            <li>Edit/Delete: Similar to SSH—use the "more" menu.</li>
-            <li>Connections are reordered by dragging.</li>
-        </ol>
-        
-        <h3>Working with MySQL Databases</h3>
-        <ul>
-            <li>Tap a MySQL database from the list to open its tables.</li>
-            <li>Features mirror SQLite: Browse tables, add/rename/duplicate/delete tables, run SQL queries, manage posts (add/edit/delete), search/filter/sort.</li>
-            <li><strong>Images:</strong> Posts can have images uploaded to the server (via the API). View, add, reorder, or delete images per post.
-                <ul>
-                    <li>When adding images: Select from gallery/camera; thumbnails are auto-generated.</li>
-                    <li>Images are stored on the server in <code>/my_database_images/{database}/{table}/{post_id}/</code> (e.g., "001_image.jpg" and "001_image_thumb.jpg").</li>
-                </ul>
-            </li>
-            <li><strong>SQL Queries:</strong> Use the SQL screen to run queries (SELECT, INSERT, etc.). Paginated results for large datasets.</li>
-            <li><strong>Default Database/Table:</strong> Set a MySQL DB/table as default for quick access.</li>
-        </ul>
-        
-        <h3>Battery Optimization for MySQL</h3>
-        <p>Similar to SSH: Disable battery optimization to prevent disconnections in the background (e.g., during long queries or uploads).</p>
-    </div>
-    
-    <div class="section">
-        <h2>Server-Side Installation for MySQL (Required only for images)</h2>
-        <p>To enable full MySQL functionality (especially images), set up a PHP script on your server. This API handles image uploads/lists/deletes/reorders, as the app can't directly access server files.</p>
-        
-        <h3>Steps to Install</h3>
-        <h4>1. Upload the PHP Script</h4>
-        <ul>
-            <li>Download the PHP script as <a href="https://bocoapps.github.io/my-database/my_database_api.php">.php</a> or <a href="https://bocoapps.github.io/my-database/my_database_api.zip">.zip</a>. You can also find it at the <a href="https://github.com/BocoApps/bocoapps.github.io/tree/main/my-database">My Database GitHub repository</a>.</li>
-            <li>Upload it to your web server (e.g., via FTP/SSH to <code>/var/www/html/</code> or a subdomain).</li>
-            <li>Ensure the server supports PHP (e.g., Apache/Nginx with PHP 7+).</li>
-            <li>The script's URL becomes your "API Base URL" (e.g., "https://example.com/my_database_api.php").</li>
-        </ul>
-        
-        <h4>2. Create Images Folder</h4>
-        <ul>
-            <li>Next to <code>my_database_api.php</code>, create a folder named <code>my_database_images</code>.</li>
-            <li>Set permissions: Make it writable by PHP (e.g., <code>chmod 755 my_database_images</code> or via hosting panel).</li>
-            <li>This folder stores uploaded images hierarchically: <code>{database}/{table}/{post_id}/{images}</code>.</li>
-        </ul>
-        
-        <h4>3. Change the API Key</h4>
-        <ul>
-            <li>In <code>my_database_api.php</code>, find <code>$API_KEY = '8888';</code>.</li>
-            <li>Change '8888' to a strong, random string (e.g., generate via password tool: 'xY9zA8bC7dE6fG5hJ4kL3mN2oP1qR0sT').</li>
-            <li>This key must match what you enter in the app's MySQL connection settings.</li>
-            <li><strong>Security Warning:</strong> Use a very strong key! Without it, anyone could access/upload/delete images.</li>
-        </ul>
-        
-        <h4>4. SSL Certificate</h4>
-        <ul>
-            <li>Use HTTPS (enable SSL on your server).</li>
-            <li>If using a self-signed or unrecognized certificate, images may not load (Android blocks insecure connections). Get a free Let's Encrypt cert or a paid one.</li>
-        </ul>
-        
-        <h4>5. Test the API</h4>
-        <ul>
-            <li>Access <code>https://yourserver.com/my_database_api.php?action=list_images&db=test&table=test&post=1&key=YOUR_KEY</code>.</li>
-            <li>It should return JSON like <code>{"success":true,"message":"","data":{"images":[]}}</code>.</li>
-            <li>In the app, when adding a MySQL connection, enter the API key and test by uploading an image to a post.</li>
-        </ul>
-    </div>
-   
-    <p><a href="/my-database-pro">My Database Pro</a> | <a href="/index.html">Boco Apps</a></p>
+        A connection paired with a locked server is locked too, and its row
+        shows the padlock — the lock belongs to the server, so it comes off
+        where it went on.</li>
+    <li><strong>What the lock is not.</strong> It is not encryption, and it is
+        not a lock against somebody with your phone and a computer. The
+        credentials are exactly as readable to the platform as they were before,
+        and the app's own backup carries them in the clear on purpose. It is a
+        lock against the person you handed the phone to, and it is worth saying
+        that plainly. The locks travel in a backup so a restore does not quietly
+        take them off — but this phone's key always wins, and the backup's locks
+        are added to it rather than replacing it.</li>
+    <li><strong>Your database passwords are the exception.</strong> They are
+        never written into a backup in any form. After a restore or a reinstall
+        an encrypted database still asks for its password, and nothing in the
+        app can recover it for you. Keep it somewhere you trust.</li>
+    <li><strong>A backup keeps the lock on.</strong> A password-protected
+        database goes into a backup as the encrypted file it is, so the backup
+        is safe to leave somewhere else and needs the same password wherever it
+        lands.</li>
+    <li><strong>Everything is yours.</strong> The databases sit on your phone,
+        exports go where you send them, and the only servers the app talks to are
+        the ones you configure yourself.</li>
+  </ul>
+  <div class="note">
+    Keep your own backups of anything important. Setup &rarr; <strong>Back up
+    everything</strong> takes the lot in one file; a ZIP export of one database
+    before a risky change takes seconds and includes its images.
+  </div>
+</section>
+
+<section id="tips">
+  <h2>17. Tips &amp; Good Habits</h2>
+  <ul>
+    <li>New to SQL? Open the <strong>Web View</strong> and pick the pre-installed
+        <strong>SQLite Tutorial</strong> page, then try what you learn straight
+        away in SQL Query — the tool row makes that two taps each way.</li>
+    <li>Drag the tool row to whichever end of the screen your thumb prefers. It
+        stays there.</li>
+    <li>Use the reminder note in the Code Editor as a running journal: it
+        autosaves as you type, so nothing is lost even if the app closes.</li>
+    <li>Before making risky changes to an important database, export a ZIP backup
+        first — it takes seconds and includes your images.</li>
+    <li>If you are unsure what a column or table is called, let the AI assistant
+        write the query — it always uses the exact real names from your
+        database.</li>
+    <li>Add the SFTP servers in Setup first, then pick one on the database
+        (or on the MySQL connection). Every export after that is a couple of
+        taps, and a folder upload only sends what actually changed.</li>
+    <li>For a public MySQL server that also serves the image API, use a hostname
+        rather than an IP and leave Use SSL on — the certificate is issued for
+        a name. If MySQL and PHP are on different hosts, put the website in
+        Image API host and leave Server host as the database hostname.</li>
+  </ul>
+</section>
+
+<section id="server-api">
+  <h2>18. Server Setup for Pictures (my_database_api.php)</h2>
+<h3>What it is</h3>
+<p>Pictures on a MySQL database cannot live in MySQL, so they are kept as files on your web server, in a folder called <code>my_database_images</code>. The app reaches them through one PHP file, <code>my_database_api.php</code>. Rows and tables work without it; only pictures need it.</p>
+<p>My Database and My Database Pro use the same file, so a server set up for one works with the other.</p>
+
+<h3>1. Download and upload the file</h3>
+<ul>
+  <li>Download <a href="https://bocoapps.github.io/my-database/my_database_api.php">my_database_api.php</a> (or as a <a href="https://bocoapps.github.io/my-database/my_database_api.zip">.zip</a>). It is also in the <a href="https://github.com/BocoApps/bocoapps.github.io/tree/main/my-database">GitHub repository</a>.</li>
+  <li>Upload it to your web server's public folder (for example <code>public_html/</code>, <code>htdocs/</code> or <code>/var/www/html/</code>).</li>
+  <li>The server needs PHP 7.1 or newer. Apache, LiteSpeed and nginx all work.</li>
+</ul>
+
+<h3>2. The pictures folder</h3>
+<ul>
+  <li>The file keeps pictures in <code>my_database_images/</code> next to itself, as <code>{database}/{table}/{record id}/</code>.</li>
+  <li>It creates the folder on the first upload if PHP may write to the web folder. If it may not, create <code>my_database_images</code> yourself and make it writable by PHP (on most shared hosting it already is; otherwise <code>chmod 775</code>).</li>
+</ul>
+
+<h3>3. Set your API key</h3>
+<p>The file ships with <strong>no key</strong> and refuses every request until you add one. Open it and find:</p>
+<pre><code>$API_KEYS = [
+    // 'put-a-long-random-string-here' =&gt; 'admin',
+];</code></pre>
+<p>Add a line with your own key and a role:</p>
+<pre><code>$API_KEYS = [
+    'c3f9a1e07b5d42e8a6f0b91d7c2e4a58f1b6d9e3' =&gt; 'admin',
+];</code></pre>
+<ul>
+  <li>A key must be <strong>at least 16 characters</strong>; a shorter one is refused. Use a long random string, not a word. <code>php -r "echo bin2hex(random_bytes(24));"</code> makes one, or use a password manager.</li>
+  <li>Type the same key into the app, in the MySQL connection's <strong>Server API Key</strong> field.</li>
+  <li>You can add more than one key, one per person or phone, each with its own role:
+    <ul>
+      <li><strong>admin</strong>: everything.</li>
+      <li><strong>uploader</strong>: see, add and reorder pictures, and delete only the pictures it added itself.</li>
+      <li><strong>viewer</strong>: see pictures only.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>4. Use HTTPS</h3>
+<ul>
+  <li>Give the server a certificate (Let's Encrypt is free). The key travels with every request, and over plain HTTP anyone on the way can read it.</li>
+  <li>A certificate is issued for a name, not an IP address, so reach the server by its name.</li>
+</ul>
+
+<h3>5. Test it</h3>
+<p>The app sends the key in an <code>X-Api-Key</code> header, never in the address, so a browser cannot test the file. From a computer:</p>
+<pre><code>curl -H "X-Api-Key: YOUR_KEY" "https://yourserver.com/my_database_api.php?action=list_images&amp;db=test&amp;table=test&amp;post=1"</code></pre>
+<ul>
+  <li>The answer should be <code>{"success":true,"message":"","data":{"images":[]}}</code>.</li>
+  <li><code>Invalid or missing API key</code> means the key is missing from the file, shorter than 16 characters, or not the same as the one you sent.</li>
+  <li>Then, in the app, add a picture to a record on that connection.</li>
+</ul>
+
+<h3>What the file protects on its own</h3>
+<ul>
+  <li>It accepts only picture files (JPEG, PNG, WebP, GIF, BMP, HEIC), checked by name and by content.</li>
+  <li>It writes an <code>.htaccess</code> into each table's folder so nothing there can run as a script, and keeps its own bookkeeping files from being downloaded. (nginx ignores <code>.htaccess</code>; the checks on every upload still apply.)</li>
+  <li>Anything that changes the server has to be a POST, so a link opened by a crawler or a link preview cannot delete pictures.</li>
+</ul>
+
+<h3>Upgrading from the older file</h3>
+<p>If your server runs the older <code>my_database_api.php</code> (the one with <code>$API_KEY = '8888';</code>):</p>
+<ul>
+  <li>Replace it with the new file and set a key in <code>$API_KEYS</code> as in step 3, at least 16 characters. <code>8888</code> no longer works.</li>
+  <li>Put the same key into each MySQL connection in the app.</li>
+  <li>Pictures already on the server stay where they are. Nothing needs moving.</li>
+  <li>The new file needs <strong>My Database 1.2.8 or newer</strong>, or any version of My Database Pro. Version 1.2.7 and older send the key in the address, which the new file does not accept, so they show no pictures until the app is updated.</li>
+</ul>
+</section>
+
+</main>
+
+<footer>
+  My Database Pro — Boco Apps, Sweden.
+</footer>
+
 </body>
 </html>
