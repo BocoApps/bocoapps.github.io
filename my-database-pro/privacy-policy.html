@@ -82,7 +82,7 @@
 <p><a href="/my-database-pro">My Database Pro</a> | <a href="/index.html">Boco Apps</a></p>
 
 <section>
-  <p class="effective">Effective 12 September 2026</p>
+  <p class="effective">Effective 12 October 2026</p>
   <p>
     My Database Pro is made by <strong>Boco Apps</strong> (“we”), in Sweden.
     This policy says what happens to information when you use the app. It is
@@ -91,11 +91,13 @@
   </p>
   <div class="note">
     <strong>The short version.</strong> We collect nothing. There is no
-    account, no advertising, no analytics and no tracking of any kind, and
-    the app sends nothing to us — we have no server for it to send anything
-    to. Your databases, your photographs and your passwords stay on your
-    phone unless <em>you</em> send them somewhere, and then they go to the
-    server or the service <em>you</em> chose.
+    account, no advertising and no tracking, and the app sends nothing to
+    us — we have no server for it to send anything to. Your databases, your
+    photographs and your passwords stay on your phone unless <em>you</em>
+    send them somewhere, and then they go to the server or the service
+    <em>you</em> chose. The one exception is Google's code scanner and text
+    reader built into the app, which report technical diagnostics to Google
+    — never your pictures or what they read (section 3).
   </div>
 </section>
 
@@ -167,20 +169,54 @@
     </tr>
     <tr>
       <td>An AI provider</td>
-      <td>Only when you use the AI assistant, and only to the provider you
+      <td>Only when you ask an AI something, and only to the provider you
           picked with the key you entered: Claude (Anthropic), OpenAI, Gemini
           (Google), Grok (xAI), Mistral, DeepSeek, Puter, or a model running on
-          your own machine. Your message goes with it, together with the
-          <em>structure</em> of the database you selected — table and column
-          names — and, if you ask a question about your data, rows the query
-          needs. Choose a local model and none of it leaves your network.
-          What the provider then does with it is governed by that provider's
-          own privacy policy.</td>
+          your own machine. What goes with your question depends on where you
+          ask it:
+          <ul>
+            <li><strong>AI chat</strong> (the ✦ on the tool row) — your
+                messages in that conversation, and parts of this app's own
+                How to page so it can answer questions about the app. None of
+                your data.</li>
+            <li><strong>SQL Query</strong> — the <em>structure</em> of the
+                database you are on (table and column names and types) and
+                the query in the box. No rows of your data.</li>
+            <li><strong>Editor</strong> — the file in the tab you ask about.</li>
+            <li><strong>Terminal</strong> — the last lines on the terminal
+                screen and your user name; never the password.</li>
+          </ul>
+          Choose a local model and none of it leaves your network. What the
+          provider then does with it is governed by that provider's own
+          privacy policy.</td>
+    </tr>
+    <tr>
+      <td>Google Play</td>
+      <td>The app is unlocked with a purchase made through Google Play. To
+          know whether it is unlocked, the app asks the Play Store app on the
+          phone what this Google account has bought. Payment is handled
+          entirely by Google Play: the app never sees your card, your name or
+          your address, and nothing about the purchase is sent to us. What
+          Google does with a purchase is governed by Google's own privacy
+          policy.</td>
+    </tr>
+    <tr>
+      <td>Google (ML Kit)</td>
+      <td>The code scanner and the text reader are Google's ML Kit, built
+          into the app. When you use them, ML Kit sends Google technical
+          diagnostics: the phone's make, model and Android version, the
+          app's name and version, an identifier for this installation (not
+          meant to identify you or the phone), and how long the recognition
+          took and whether it failed. The picture and the code or text read
+          from it are never sent — reading is done on the phone. Google uses
+          this to measure and improve ML Kit and does not pass it on; see
+          <a href="https://developers.google.com/ml-kit/android-data-disclosure">Google's
+          ML Kit data disclosure</a>.</td>
     </tr>
   </table>
   <p>
     There is no other network traffic. The app has no server of ours behind
-    it and never contacts one.
+    it and never contacts one, and none of the above reaches us.
   </p>
 </section>
 
@@ -192,9 +228,10 @@
         you attach are copied into the app's own storage.</li>
     <li><strong>Scanning a code and reading text are done on the device.</strong>
         The recognisers are bundled with the app; no picture is uploaded to
-        anyone to be read.</li>
+        anyone to be read. They do report technical diagnostics to Google
+        (section 3).</li>
     <li><strong>The microphone</strong> is used only while you hold the dictate
-        button in the AI assistant. Speech is turned into text by the phone's
+        button in the AI chat. Speech is turned into text by the phone's
         own speech service, which, depending on your phone's settings, may do
         that over the network — that part is Android's, not ours.</li>
   </ul>
@@ -265,7 +302,9 @@
 </main>
 
 <footer>
-  My Database Pro — Boco Apps, Sweden.
+  My Database Pro — Boco Apps, Sweden.<br>
+  This policy is also published at
+  <a href="https://bocoapps.github.io/my-database/privacy-policy.html">bocoapps.github.io/my-database/privacy-policy.html</a>.
 </footer>
 
 </body>
