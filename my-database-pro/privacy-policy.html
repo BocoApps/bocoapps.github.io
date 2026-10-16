@@ -82,7 +82,7 @@
 <p><a href="/my-database-pro">My Database Pro</a> | <a href="/index.html">Boco Apps</a></p>
 
 <section>
-  <p class="effective">Effective 12 October 2026</p>
+  <p class="effective">Effective 16 October 2026</p>
   <p>
     My Database Pro is made by <strong>Boco Apps</strong> (“we”), in Sweden.
     This policy says what happens to information when you use the app. It is
@@ -150,7 +150,10 @@
       <td>Your MySQL server</td>
       <td>The queries you run and the rows you write, over your own
           connection. Images for those records go to the image API on the
-          web host you configured.</td>
+          web host you configured. If you share a database under
+          <strong>Users</strong>, the app creates the logins and picture keys
+          for those people on that server and web host, and nowhere
+          else.</td>
     </tr>
     <tr>
       <td>Your SFTP / FTP server</td>
@@ -242,8 +245,11 @@
   <p>
     <strong>Back up everything</strong> writes one ZIP file: your databases,
     their images, your saved pages, the order of your lists, and your saved
-    logins. The logins have to be readable on another phone, so they are in
-    that file as plain text.
+    logins. The logins have to be readable on another phone, so they cannot
+    stay under the phone's own key. With a <strong>Backup password</strong>
+    set, they go into the file encrypted with it (AES-256-GCM, the key drawn
+    from the password with PBKDF2), and only that password opens them;
+    without one, they are in the file as plain text.
   </p>
   <div class="note">
     <strong>A backup file is a secret, like a sheet of paper with your
@@ -252,6 +258,14 @@
     Database passwords are deliberately <em>not</em> in it: a backup that
     could open your encrypted databases would not be worth much.
   </div>
+  <p>
+    <strong>A connection file</strong>, made under <strong>Users</strong> to
+    share one database with someone, holds a single MySQL connection and is
+    always encrypted the same way, with a password you choose and tell them
+    separately. You send it yourself, to whoever you choose; we never see it.
+    Treat it like a backup: whoever has the file and its password has that
+    login.
+  </p>
 </section>
 
 <section>
@@ -304,7 +318,7 @@
 <footer>
   My Database Pro — Boco Apps, Sweden.<br>
   This policy is also published at
-  <a href="https://bocoapps.github.io/my-database/privacy-policy.html">bocoapps.github.io/my-database/privacy-policy.html</a>.
+  <a href="https://bocoapps.github.io/my-database-pro/privacy-policy.html">bocoapps.github.io/my-database-pro/privacy-policy.html</a>.
 </footer>
 
 </body>
